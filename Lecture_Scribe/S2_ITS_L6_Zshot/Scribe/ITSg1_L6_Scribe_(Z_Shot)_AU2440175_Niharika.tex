@@ -1,0 +1,230 @@
+\documentclass[12pt]{article}
+
+% ---------- Packages ----------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{parskip} % nicer paragraph spacing (no indent)
+\usepackage{lmodern} % better fonts
+
+% ---------- Document ----------
+\begin{document}
+
+\begin{center}
+{\LARGE \textbf{Lecture 6 — Discrete RVs, Expectation and Problem Solving (CSE400)}}\\[0.5em]
+\textbf{Course:} CSE400 — Fundamentals of Probability in Computing\\
+\textbf{Instructor:} Dhaval Patel, PhD\\
+\textbf{Date on slides:} January 22, 2025
+\end{center}
+
+\hrule
+\vspace{1em}
+
+\section*{1. Outline (as listed)}
+\begin{itemize}[leftmargin=*]
+  \item Previous Lecture Recap: Random Variables (RVs)
+  \item Independent Events (Examples)
+  \item Types of Discrete Random Variables: Bernoulli RV, Binomial RV, Geometric RV, Poisson RV
+  \item Expectation of RVs: definition and example; expectation of a function of RV; linear operation with expectation; $n^{\text{th}}$ moments and central moments (variance, skewness, kurtosis)
+  \item The Cumulative Density Function (CDF): definition, properties, examples
+  \item The Probability Density Function (PDF): definition, properties, examples
+\end{itemize}
+
+\begin{quote}
+\textbf{Note (scope of this scribe):} The attached PDF excerpt provides detailed slide content for random variables, PMF, and Bayes’ theorem examples; other outline items above are listed but not developed in the shown slides.
+\end{quote}
+
+\section*{2. Random Variables (Motivation and Concept)}
+\subsection*{2.1 Definition (Random Variable as a Function)}
+A random variable $(X)$ on a sample space $(\Omega)$ is a function
+\[
+X:\Omega \to \mathbb{R}
+\]
+that assigns to each sample point $(\omega\in\Omega)$ a real number $(X(\omega))$.
+
+\subsection*{2.2 Discreteness Restriction (as stated)}
+Until further notice, attention is restricted to random variables that are \textbf{discrete}, i.e., they take values in a range that is \textbf{finite or countably infinite}. Even though $(X)$ is defined as mapping $(\Omega)$ to $\mathbb{R}$, the actual set of values $\{X(\omega):\omega\in\Omega\}$ that $(X)$ takes is a \textbf{discrete subset} of $\mathbb{R}$.
+
+\section*{3. Visualizing a Distribution (Bar Diagram Interpretation)}
+The distribution of a random variable can be visualized as a bar diagram:
+\begin{itemize}[leftmargin=*]
+  \item The \textbf{x-axis} represents the values the random variable can take on.
+  \item The \textbf{height} of the bar at value $a$ is the probability $\Pr[X=a]$.
+  \item These probabilities can be computed by looking at the probability of the \textbf{corresponding event} in the sample space.
+\end{itemize}
+
+\section*{4. Discrete vs Continuous Variables (Guide / Checklist Items)}
+\subsection*{4.1 Discrete Variable (listed properties)}
+\begin{itemize}[leftmargin=*]
+  \item Countable support
+  \item Probability mass function
+  \item Probabilities assigned to single values
+  \item Each possible value has strictly positive probability
+\end{itemize}
+
+\subsection*{4.2 Continuous Variable (listed properties)}
+\begin{itemize}[leftmargin=*]
+  \item Uncountable support
+  \item Probability density function (PDF)
+  \item Probabilities assigned to intervals of values
+  \item Each possible value has zero probability
+\end{itemize}
+
+\section*{5. Worked Example 1 — Tossing 3 Fair Coins}
+\subsection*{5.1 Experiment and Random Variable}
+Experiment: toss \textbf{3 fair coins}.\\
+Let $(Y)$ denote the \textbf{number of heads} that appear. Then $Y$ takes one of the values $0,1,2,3$.
+
+\subsection*{5.2 Probabilities (with listed outcome groupings)}
+\[
+\Pr(Y=0)=\Pr((t,t,t))=\frac{1}{8}
+\]
+\[
+\Pr(Y=1)=\Pr((t,t,h),(t,h,t),(h,t,t))=\frac{3}{8}
+\]
+\[
+\Pr(Y=2)=\Pr((t,h,h),(h,t,h),(h,h,t))=\frac{3}{8}
+\]
+\[
+\Pr(Y=3)=\Pr((h,h,h))=\frac{1}{8}
+\]
+
+\subsection*{5.3 Total Probability Check (as shown)}
+Since $Y$ must take one of the values $0$ through $3$,
+\[
+1=\Pr\!\left(\bigcup_{i=0}^{3}\{Y=i\}\right)=\sum_{i=0}^{3}\Pr(Y=i).
+\]
+
+\section*{6. Probability Mass Function (PMF)}
+\subsection*{6.1 Discrete Random Variable (concept statement)}
+A random variable that can take on at most a \textbf{countable number} of possible values is said to be \textbf{discrete}.
+
+\subsection*{6.2 Definition and Notation}
+Let $(X)$ be a discrete random variable with range (possible values)
+\[
+R_X = x_1, x_2, x_3, \ldots \quad (\text{finite or countably infinite}).
+\]
+The function
+\[
+P_X(x_k)=P(X=x_k),\quad \text{for } k=1,2,3,\ldots
+\]
+is called the \textbf{Probability Mass Function (PMF)} of $(X)$.
+
+\subsection*{6.3 Required Property (Normalization)}
+Since $(X)$ must take one of the values $x_k$, the slides state:
+\[
+\sum_{k=1}^{\infty} P_X(x_k)=1.
+\]
+
+\section*{7. Worked Example 2 — PMF with \texorpdfstring{$p(i)=c\frac{\lambda^i}{i!}$}{p(i)=c lambda^i/i!}}
+\subsection*{7.1 Given}
+The probability mass function of a random variable $(X)$ is given by
+\[
+p(i)=c\frac{\lambda^i}{i!},\quad i=0,1,2,\ldots
+\]
+where $\lambda$ is some positive value.\\
+Find $P[X=0]$ and $P[X>2]$.
+
+\subsection*{7.2 Step 1 — Use \texorpdfstring{$\sum_{i=0}^{\infty}p(i)=1$}{sum p(i)=1} to solve for $c$}
+Since $\sum_{i=0}^{\infty}p(i)=1$,
+\[
+c\sum_{i=0}^{\infty}\frac{\lambda^i}{i!}=1.
+\]
+Using the given series identity on the slide,
+\[
+e^{x}=\sum_{i=0}^{\infty}\frac{x^i}{i!},
+\]
+we have:
+\[
+ce^{\lambda}=1 \quad \text{or} \quad c=e^{-\lambda}.
+\]
+
+\subsection*{7.3 Step 2 — Compute \texorpdfstring{$P[X=0]$}{P[X=0]}}
+\[
+P[X=0]=e^{-\lambda}\frac{\lambda^0}{0!}=e^{-\lambda}.
+\]
+
+\subsection*{7.4 Step 3 — Compute \texorpdfstring{$P[X>2]$}{P[X>2]}}
+\[
+P[X>2]=1-P[X\le 2]
+=1-P[X=0]-P[X=1]-P[X=2].
+\]
+With $c=e^{-\lambda}$,
+\[
+P[X>2]=1-e^{-\lambda}-\lambda e^{-\lambda}-\frac{\lambda^2 e^{-\lambda}}{2}.
+\]
+
+\section*{8. Bayes’ Theorem (Recap on Slides)}
+\subsection*{8.1 Stated Relationship}
+Using:
+\[
+\Pr(A B_i)=\Pr(B_i\mid A)\Pr(A),
+\]
+we get:
+\[
+\Pr(B_i\mid A)=\frac{\Pr(A\mid B_i)\Pr(B_i)}{\sum_{j=1}^{n}\Pr(A\mid B_j)\Pr(B_j)}.
+\]
+This is known as the \textbf{Bayes Formula [Proposition 3.1]}.
+
+\subsection*{8.2 Terminology (as given)}
+\begin{itemize}[leftmargin=*]
+  \item $\Pr(B_i)$ is the \textbf{a priori probability} (probabilities formed from self-evident or presupposed models).
+  \item $\Pr(B_i\mid A)$ is the \textbf{posteriori probability} (probabilities derived or calculated after observing certain events of event $B_i$ given $A$).
+\end{itemize}
+
+\section*{9. Worked Example 3 — Auditorium with 30 Rows (Bayes Application)}
+\subsection*{9.1 Problem Setup}
+A certain auditorium has \textbf{30 rows} of seats.
+\begin{itemize}[leftmargin=*]
+  \item Row 1 has \textbf{11} seats, Row 2 has \textbf{12} seats, Row 3 has \textbf{13} seats, and so on to Row 30 which has \textbf{40} seats.
+\end{itemize}
+
+A door prize is to be given away by:
+\begin{enumerate}[leftmargin=*]
+  \item randomly selecting a \textbf{row} (with equal probability of selecting any of the 30 rows), and
+  \item then randomly selecting a \textbf{seat within that row} (each seat in the row equally likely).
+\end{enumerate}
+
+Task (as written): compute the probability that \textbf{Seat 15} was selected given that \textbf{Row 20} was selected, and also find the probability that \textbf{Row 20} was selected given that \textbf{Seat 15} was selected.
+
+\subsection*{9.2 Notation Used on Slide}
+\begin{itemize}[leftmargin=*]
+  \item $S_{15}$: event ``Seat 15 was selected''
+  \item $R_{20}$: event ``Row 20 was selected''
+  \item $\Pr_a(\cdot)$ notation appears on the slide for these probabilities.
+\end{itemize}
+
+\subsection*{9.3 Part A — Compute \texorpdfstring{$\Pr_a(S_{15}\mid R_{20})$}{P(S15|R20)}}
+From the slide:
+\[
+\Pr_a(S_{15}\mid R_{20})=\frac{1}{30}.
+\]
+(Reason encoded in the slide’s row-size pattern: Row 20 has $(20+10=30)$ seats, and seats are equally likely within the chosen row.)
+
+\subsection*{9.4 Part B — Compute \texorpdfstring{$\Pr_a(R_{20}\mid S_{15})$}{P(R20|S15)}}
+\subsubsection*{Step 1 — Compute \texorpdfstring{$\Pr_a(S_{15})$}{P(S15)} via total probability}
+The slide expands:
+\[
+\Pr_a(S_{15})=\sum_{k=5}^{30}\Pr_a(S_{15}\mid R_k)\Pr_a(R_k).
+\]
+(The lower limit $k=5$ reflects that Seat 15 first exists when a row has at least 15 seats; by the stated pattern, Row 5 has $(5+10=15)$ seats.)
+
+Using the row-size rule (Row $k$ has $k+10$ seats), the slide substitutes:
+\[
+\Pr_a(S_{15})=\sum_{k=5}^{30}\left(\frac{1}{k+10}\cdot \frac{1}{30}\right)=0.0342.
+\]
+
+\subsubsection*{Step 2 — Apply Bayes’ formula}
+\[
+\Pr_a(R_{20}\mid S_{15})
+=\frac{\Pr_a(S_{15}\mid R_{20})\Pr_a(R_{20})}{\Pr_a(S_{15})}.
+\]
+With $\Pr_a(S_{15}\mid R_{20})=\frac{1}{30}$, $\Pr_a(R_{20})=\frac{1}{30}$, and $\Pr_a(S_{15})=0.0342$, the slide computes:
+\[
+\Pr_a(R_{20}\mid S_{15})
+=\frac{\frac{1}{30}\cdot \frac{1}{30}}{0.0342}
+=0.0325.
+\]
+
+\end{document}

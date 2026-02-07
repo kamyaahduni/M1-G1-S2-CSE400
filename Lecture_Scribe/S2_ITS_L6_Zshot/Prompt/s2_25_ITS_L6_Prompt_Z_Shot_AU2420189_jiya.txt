@@ -1,0 +1,20 @@
+Generate a lecture scribe intended to serve as exam-oriented reference material for CSE 400: Fundamentals of Probability in Computing.
+
+Use ONLY the provided context, which consists of the lecture slides in the attached PDF (Lecture 6, Section 2). Do not use any external knowledge or introduce material that is not present in the provided lecture content.
+
+The scribe must faithfully reconstruct what was taught in the lecture. Include:
+• All definitions and notation exactly as presented
+• Assumptions and conditions stated in the lecture
+• Statements of results, theorems, or propositions if present
+• Proofs or derivations step by step, only if they appear in the lecture
+• Worked examples with all intermediate steps, only if they appear in the lecture
+
+Do NOT introduce new examples, alternative explanations, additional intuition, or simplified interpretations. Do NOT add content for clarity beyond what is explicitly in the lecture.
+
+Organize the scribe in a clear, structured manner with appropriate section headings so that it can be reliably used for exam revision. Prioritize correctness, completeness, and strict faithfulness to the lecture material. please give me the text  in copy pastable manner without compromising the content. 
+
+compliant with:
+
+Zero-shot prompting and give ocr permission
+
+give latex code for this

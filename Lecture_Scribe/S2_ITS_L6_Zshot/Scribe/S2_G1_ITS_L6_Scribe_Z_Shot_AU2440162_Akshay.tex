@@ -1,0 +1,245 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{enumitem}
+\geometry{margin=1in}
+
+\title{\textbf{CSE400 – Fundamentals of Probability in Computing}\\
+\vspace{0.3cm}
+\large Lecture 6: Discrete RVs, Expectation and Problem Solving}
+\author{
+Dhaval Patel, PhD\\
+Associate Professor\\
+Major Advisor – Computer Science and Engineering (CSE)\\
+Machine Intelligence, Computing and xG Networks (MICxN) Research Lab\\
+SEAS – Ahmedabad University, Ahmedabad, Gujarat – India
+}
+\date{January 22, 2025}
+
+\begin{document}
+
+\maketitle
+
+\hrule
+\vspace{0.5cm}
+
+\section*{Outline}
+
+\begin{itemize}
+    \item Previous Lecture Recap: Random Variables (RVs)
+    \begin{itemize}
+        \item Independent Events / Examples
+    \end{itemize}
+    \item Definition and Example
+    \item Types of Discrete Random Variables
+    \begin{itemize}
+        \item Bernoulli RV
+        \item Binomial RV
+        \item Geometric RV
+        \item Poisson RV
+    \end{itemize}
+    \item Expectation of RVs
+    \begin{itemize}
+        \item Definition and Example
+        \item Expectation of a Function of RV
+        \item Linear Operation with Expectation
+    \end{itemize}
+    \item Moments and Central Moments of RVs
+    \begin{itemize}
+        \item Variance, Skewness and Kurtosis
+    \end{itemize}
+    \item The Cumulative Density Function (CDF)
+    \begin{itemize}
+        \item Definition, Properties and Examples
+    \end{itemize}
+    \item The Probability Density Function (PDF)
+    \begin{itemize}
+        \item Definition, Properties and Examples
+    \end{itemize}
+\end{itemize}
+
+\section*{Random Variables}
+
+\subsection*{Motivation and Concept}
+
+A random variable ( $X$ ) on a sample space ( $\Omega$ ) is a function
+\[
+X : \Omega \rightarrow \mathbb{R}
+\]
+that assigns to each sample point ( $\omega \in \Omega$ ) a real number ( $X(\omega)$ ).
+
+Until further notice, we will restrict our attention to random variables that are \textbf{discrete}, i.e., they take values in a range that is \textbf{finite or countably infinite}. This means even though we define ( $X$ ) to map ( $\Omega$ ) to ( $\mathbb{R}$ ), the actual set of values
+\[
+\{ X(\omega) : \omega \in \Omega \}
+\]
+that ( $X$ ) takes is a \textbf{discrete subset of ( $\mathbb{R}$ )}.
+
+Sample space
+
+Sample point ( $s$ )
+
+Sample points mapped by the discrete random variable ( $X(s)$ ) into numbers on the real line.
+
+Sample space of all permutations
+
+\section*{Random Variables}
+
+\subsection*{Motivation and Concept}
+
+The distribution of a random variable can be visualized as a \textbf{bar diagram}:
+\[
+\Pr[X = a]
+\]
+
+The x-axis represents the values that a random variable can take on.
+
+The height of the bar at a value ( $a$ ) is the probability ( $\Pr[X = a]$ ).
+
+Each of these probabilities can be computed by looking at the probability of the corresponding event in the sample space.
+
+\section*{Guide to Selecting a Probability Distribution}
+
+\subsection*{Random Variables}
+
+\subsubsection*{Discrete variable}
+
+\begin{itemize}
+    \item Countable support
+    \item Probability mass function
+    \item Probabilities assigned to single values
+    \item Each possible value has strictly positive probability
+\end{itemize}
+
+\section*{Bernoulli Random Variable}
+
+A Bernoulli random variable ( $X$ ) takes values in
+\[
+\{0,1\}
+\]
+
+\[
+\Pr[X = 1] = p
+\]
+
+\[
+\Pr[X = 0] = 1 - p
+\]
+
+\section*{Binomial Random Variable}
+
+A binomial random variable counts the number of successes in ( $n$ ) independent Bernoulli trials.
+
+\[
+X \sim \text{Binomial}(n, p)
+\]
+
+\[
+\Pr[X = k] = \binom{n}{k} p^k (1-p)^{n-k}
+\]
+
+\section*{Geometric Random Variable}
+
+A geometric random variable models the number of trials until the first success.
+
+\[
+\Pr[X = k] = (1-p)^{k-1} p
+\]
+
+\section*{Poisson Random Variable}
+
+A Poisson random variable models the number of occurrences in a fixed interval.
+
+\[
+\Pr[X = k] = \frac{\lambda^k e^{-\lambda}}{k!}
+\]
+
+\section*{Expectation of Random Variables}
+
+\subsection*{Definition}
+
+The expectation of a discrete random variable ( $X$ ) is defined as
+
+\[
+E[X] = \sum_x x \Pr[X = x]
+\]
+
+\section*{Expectation}
+
+\subsection*{Example}
+
+(Example shown on slide – no additional steps provided)
+
+\section*{Expectation of a Function of a Random Variable}
+
+Let ( $Y = g(X)$ )
+
+\[
+E[Y] = \sum_x g(x) \Pr[X = x]
+\]
+
+\section*{Linear Operation with Expectation}
+
+\[
+E[aX + b] = aE[X] + b
+\]
+
+\section*{Moments and Central Moments of RVs}
+
+\begin{itemize}
+    \item Mean
+    \item Variance
+    \item Skewness
+    \item Kurtosis
+\end{itemize}
+
+\section*{Variance}
+
+\[
+\text{Var}(X) = E[(X - E[X])^2]
+\]
+
+\section*{Cumulative Density Function (CDF)}
+
+\subsection*{Definition}
+
+\[
+F_X(x) = \Pr[X \le x]
+\]
+
+\section*{Properties of CDF}
+
+\begin{itemize}
+    \item Non-decreasing
+    \item Right-continuous
+    \item $ \lim_{x \to -\infty} F_X(x) = 0 $
+    \item $ \lim_{x \to \infty} F_X(x) = 1 $
+\end{itemize}
+
+\section*{Probability Density Function (PDF)}
+
+\subsection*{Definition}
+
+\[
+f_X(x) = \Pr[X = x]
+\]
+
+\section*{Properties of PDF}
+
+\[
+\sum_x f_X(x) = 1
+\]
+
+\[
+f_X(x) \ge 0
+\]
+
+\section*{End of Lecture 6}
+
+\vspace{0.5cm}
+\hrule
+\vspace{0.3cm}
+
+\textbf{(All content above is reproduced strictly from the provided lecture PDF.\\
+No external material, inference, completion, or modification has been applied.)}
+
+\end{document}

@@ -1,0 +1,11 @@
+Create a lecture scribe which is purely exam oriented reference work of CSE400.: Fundamentals of Probability in Computing - Lecture 6.
+
+The only given context to use is the lecture slides and the textbook material. The scribe should be a close reproduction of the information learnt in the classroom, which can be used to write closed-notes exams.
+
+Included definitions, notation, assumptions, formal statements of results, proofs or derivations, worked examples, only when they are present in the lecture materials, and in the form that they take there. Don't elaborate much with with explanations, intuition, alternative methods of approach, examples. Do not generalize, expand or paraphrase the material more than it is brought out.
+
+Arrange the scribe in clear sections and headings in accordance with the structure and the logical flow of the lecture. Stick to a formal academic style of writing and style.
+
+Never make up anything, never tell us how you came to your conclusion, and never add extra explanations anywhere.
+
+Only the lecture scribe should be generated.

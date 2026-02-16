@@ -1,0 +1,185 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{titlesec}
+\usepackage{setspace}
+
+\geometry{margin=1in}
+\setstretch{1.2}
+
+\title{\textbf{CSE 400: Fundamentals of Probability in Computing} \\ 
+Lecture 11: Transformation of Random Variables}
+\author{Instructor: Dhaval Patel, PhD}
+\date{February 10, 2026}
+
+\begin{document}
+
+\maketitle
+
+\section*{1. Overview and Learning Objectives}
+
+This lecture focuses on:
+
+\begin{itemize}
+    \item \textbf{Transformation of Random Variables} \\
+    Learning techniques to determine the distribution of a transformed random variable.
+    
+    \item \textbf{Function of Two Random Variables} \\
+    Studying joint transformations and deriving the resulting distributions.
+    
+    \item \textbf{Illustrative Example:} Detailed derivation for the specific case
+    \[
+    Z = X + Y
+    \]
+\end{itemize}
+
+\textbf{Objective:} Develop systematic methods to compute the distribution of new random variables defined as functions of existing ones.
+
+\section*{2. Transformation of a Random Variable}
+
+Let $X$ be a random variable with a known distribution.
+
+Define a new random variable:
+\[
+Y = g(X)
+\]
+where $g(\cdot)$ is a function.
+
+\subsection*{Problem Statement}
+
+Given the distribution of $X$, determine the distribution of $Y$.
+
+\subsection*{Methodological Requirements}
+
+\begin{itemize}
+    \item Clear definition of the transformation function $g(\cdot)$
+    \item Identification of the support of $Y$
+    \item Proper mapping of probabilities from $X$ to $Y$
+\end{itemize}
+
+The transformation technique allows us to derive the probability distribution of $Y$ from that of $X$.
+
+\section*{3. Function of Two Random Variables}
+
+Let $X$ and $Y$ be two random variables with a known joint distribution.
+
+Define:
+\[
+Z = h(X, Y)
+\]
+
+\subsection*{Goal}
+
+Determine the distribution of $Z$.
+
+\subsection*{Required Steps}
+
+\begin{itemize}
+    \item Use the joint distribution of $X$ and $Y$
+    \item Identify the region of integration corresponding to the transformation
+    \item Express probabilities in terms of the derived variable
+\end{itemize}
+
+Joint transformations require careful handling of probability over multidimensional regions.
+
+\section*{4. Illustrative Example: $Z = X + Y$}
+
+Let $X$ and $Y$ be two random variables. Define:
+\[
+Z = X + Y
+\]
+
+\subsection*{4.1 Problem Structure}
+
+To determine the distribution of $Z$, compute:
+\[
+F_Z(z) = P(Z \leq z)
+\]
+
+Since
+\[
+Z = X + Y,
+\]
+we rewrite:
+\[
+Z \leq z \quad \Longleftrightarrow \quad X + Y \leq z
+\]
+
+Thus,
+\[
+F_Z(z) = P(X + Y \leq z)
+\]
+
+This corresponds to evaluating probability over the region:
+\[
+\{(x,y) : x + y \leq z\}
+\]
+
+\subsection*{4.2 Continuous Case}
+
+If $X$ and $Y$ are continuous with joint PDF $f_{X,Y}(x,y)$, then:
+
+\[
+F_Z(z) = \iint_{x+y \leq z} f_{X,Y}(x,y)\, dx\, dy
+\]
+
+The PDF of $Z$ is obtained by differentiation:
+
+\[
+f_Z(z) = \frac{d}{dz} F_Z(z)
+\]
+
+If $X$ and $Y$ are independent:
+
+\[
+f_{X,Y}(x,y) = f_X(x) f_Y(y)
+\]
+
+Then,
+
+\[
+f_Z(z) = \int_{-\infty}^{\infty} f_X(x) f_Y(z - x)\, dx
+\]
+
+This integral is known as the \textbf{convolution} of $f_X$ and $f_Y$.
+
+\subsection*{4.3 Discrete Case}
+
+If $X$ and $Y$ are discrete:
+
+\[
+P(Z = z) = \sum_{x} P(X = x, Y = z - x)
+\]
+
+If $X$ and $Y$ are independent:
+
+\[
+P(Z = z) = \sum_{x} P(X = x) P(Y = z - x)
+\]
+
+\section*{5. Conceptual Structure}
+
+The lecture progression:
+
+\begin{enumerate}
+    \item Transformation of a single random variable
+    \item Extension to functions of two random variables
+    \item Application to the sum $Z = X + Y$
+\end{enumerate}
+
+Derived distributions are computed directly from known joint distributions.
+
+\section*{6. Key Takeaways}
+
+\begin{itemize}
+    \item A transformed random variable requires precise probability mapping.
+    \item Joint distributions are essential when dealing with multiple variables.
+    \item The distribution of $Z = X + Y$ is obtained from:
+    \[
+    P(X + Y \leq z)
+    \]
+    \item For independent continuous variables, the PDF of the sum is obtained via convolution.
+\end{itemize}
+
+\end{document}
+

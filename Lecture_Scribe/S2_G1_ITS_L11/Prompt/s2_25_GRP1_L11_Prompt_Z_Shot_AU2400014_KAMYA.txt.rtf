@@ -1,0 +1,218 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww7540\viewh9320\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 PROMPTS OF GEMINIE \
+\
+# ROLE & CONTEXT\
+You are an expert in instructional design and the CSE 400 \'93Lecture Scribe\'94 assignment guidelines. \'a0\
+I am a student: \'a0\
+- **Name**: Kamya \'a0\
+- **Section**: 2 \'a0\
+- **Group**: 1 \'a0\
+- **Lecture**: 11 \'a0\
+- **Assigned prompting style**: Zero\uc0\u8209 Shot \'a0\
+- **Course**: CSE 400 \'96 Fundamentals of Probability in Computing, Ahmedabad University \'a0\
+\
+---\
+\
+# YOUR TASK\
+Generate a **single, ready\uc0\u8209 to\u8209 use zero\u8209 shot prompt** that I will later paste into a separate chat (with lecture materials attached) to produce a lecture scribe. \'a0\
+\
+The zero\uc0\u8209 shot prompt you write must **strictly adhere** to the **Zero\u8209 Shot Prompting rules** from the official guidelines (quoted verbatim below). \'a0\
+\
+---\
+\
+## ZERO\uc0\u8209 SHOT PROMPTING RULES \'96 EXACT QUOTES\
+\
+### 6.2 Required Zero\uc0\u8209 Shot Prompt Components\
+Your prompt must clearly include:\
+1. The purpose of the scribe (exam\uc0\u8209 oriented reference material) \'a0\
+2. Scope constraints (what content to include and exclude) \'a0\
+3. Structural expectations (organisation, sections, headings) \'a0\
+\
+### 6.3 What You Must Do (Zero\uc0\u8209 Shot)\
+- State explicitly that the scribe is intended for exam preparation \'a0\
+- Instruct inclusion of proofs, derivations, and worked examples **only when they appear in the provided context** \'a0\
+- Emphasise strict faithfulness to the lecture and textbook materials \'a0\
+\
+### 6.4 What You Must NOT Do (Zero\uc0\u8209 Shot)\
+- No example scribes or demonstrations \'a0\
+-  No sample equations, partial proofs, or worked steps \'a0\
+-  No request for the model to explain its reasoning process \'a0\
+-  No phrases such as \'93for example\'94 or \'93like this\'94 \'a0\
+\
+---\
+\
+# ADDITIONAL MANDATORY CONSTRAINTS\
+- **Faithfulness:** The scribe must contain **only** information traceable to the attached lecture slides / textbook excerpts. \'a0\
+- **Scope:** Include definitions, notation, assumptions, theorem statements, proofs/derivations, and worked examples **only if they appear in the context**. \'a0\
+- **Structure:** Use clear headings and logical flow (e.g., \'93Definitions\'94, \'93Theorems\'94, \'93Proofs\'94, \'93Worked Examples\'94). \'a0\
+- **Zero\uc0\u8209 Shot Purity:** No borrowing from One\u8209 Shot, Chain\u8209 of\u8209 Thought, or Self\u8209 Consistency styles. \'a0\
+- **Single\uc0\u8209 Turn:** This prompt will be used **exactly once** in a separate chat; no follow\u8209 up, no refinement. \'a0\
+\
+---\
+\
+# OUTPUT FORMAT\
+- Provide **only** the zero\uc0\u8209 shot prompt itself, inside a plain code block. \'a0\
+- Do **not** include any explanations, commentary, greetings, or extra text before/after the code block. \'a0\
+- The zero\uc0\u8209 shot prompt must be **self\u8209 contained** and **generic** enough to work for any probability lecture (definitions, theorems, proofs, examples). \'a0\
+\
+Begin your response with the code block.\
+\
+\
+\
+PROMPT FOR THE SCRIBE GENERATION \
+\
+Generate a lecture scribe for the course CSE 400: Fundamentals of Probability in Computing based strictly on the attached materials.\
+\
+Purpose:\
+This scribe is intended explicitly for exam preparation and must serve as an exam-oriented reference material.\
+\
+Scope Constraints and Faithfulness:\
+You must maintain strict faithfulness to the provided lecture and textbook materials. The scribe must contain only information traceable to the attached context. Include definitions, notation, assumptions, and theorem statements strictly from the provided text. Include proofs, derivations, and worked examples only when they appear in the provided context. Exclude any external knowledge, external formulas, or concepts not explicitly found in the attached documents.\
+\
+Structural Expectations:\
+Organize the scribe using clear headings and a logical flow. Structure the document using the following specific headings based on the provided content:\
+- Scribe Information (Student: Kamya | Section: 2 | Group: 1 | Lecture: 11)\
+- Definitions\
+- Notation and Assumptions\
+- Theorems\
+- Proofs\
+- Worked Examples\
+\
+Do not output any conversational text, introductory greetings, concluding remarks, or explanations of your generation process. Output strictly the formatted lecture scribe.\
+\
+\
+FOR THE CONVERION OF SCRIBE TO LATEX \
+\
+Convert the following lecture scribe into a well\uc0\u8209 formatted LaTeX document. \'a0\
+\
+**Rules:**\
+- Preserve the wording **exactly** \'96 do not add, delete, or rephrase any content.\
+- Use appropriate LaTeX formatting: \'a0\
+\'a0 - Section headings (`\\section*\{\}` or `\\subsection*\{\}`) for structure. \'a0\
+\'a0 - Mathematical expressions in `$...$` or `\\[ ... \\]` as needed. \'a0\
+\'a0 - `\\begin\{definition\}...\\end\{definition\}`, `\\begin\{theorem\}...\\end\{theorem\}`, `\\begin\{proof\}...\\end\{proof\}` environments if desired (or simply bold/italic styling). \'a0\
+\'a0 - `\\begin\{align*\}...\\end\{align*\}` for multi\uc0\u8209 line equations. \'a0\
+- Include a complete LaTeX preamble (`\\documentclass\{article\}`, `\\usepackage\{amsmath, amssymb, amsthm\}`) so the document compiles directly. \'a0\
+- Output **only** the LaTeX source code \'96 no extra commentary.\
+\
+Here is the scribe text:\
+Scribe Information\
+\
+Student:\'a0Kamya\'a0\
+\
+Section:\'a02\'a0\
+\
+Group:\'a01\'a0\
+\
+Lecture:\'a011: Transformation of Random Variables\'a0\
+\
+Course:\'a0CSE400 - Fundamentals of Probability in Computing\'a0\
++1\
+\
+Instructor:\'a0Dhaval Patel, PhD\'a0\
+\
+Date:\'a0February 10, 2026\'a0\
+Definitions\
+\
+Transformation of Random Variables:\'a0The learning of transformation techniques for probability density functions (PDF) of random variables.\
+\
+Function of Two Random Variables:\'a0The process involving joint transformations and their derived distributions.\
+Notation and Assumptions\
+\
+$X$\'a0and\'a0$Y$\'a0represent random variables, with transformations such as\'a0$Z_\{1\}=X+Y$,\'a0$Z_\{2\}=X-Y$, and\'a0$Z_\{3\}=X/Y$.\
+\
+$f_X(x)$\'a0represents the probability density function (PDF) of the random variable\'a0$X$.\
++1\
+\
+$F_X(x)$\'a0represents the cumulative distribution function (CDF).\
+\
+Assumption:\'a0The PDF of\'a0$X$, denoted as\'a0$f_X(x)$, is known a priori.\
++1\
+\
+$y=g(x)$\'a0denotes a new transformed random variable.\
+\
+$f_Y(y)$\'a0and\'a0$F_Y(y)$\'a0are used to denote the PDF and CDF of the new random variable.\
++1\
+Theorems\
+\
+Objective:\'a0To find the CDF and PDF of a new transformed random variable,\'a0$f_Y(y)$.\
+\
+General PDF Transformation Formula:\'a0For a transformation, the PDF is defined by the following equation:\
+$$f_Y(y) = \\frac\{f_X(x)\}\{|\\frac\{dy\}\{dx\}|\}\\Bigg|_\{x=g^\{-1\}(y)\}$$\
+Proofs\
+\
+Derivation for a Monotonically Increasing Transformation:\
+\
+Step 1 ($S_1$):\'a0Establish the CDF.\
+$$F_Y(y) = Pr(Y \\le y) = Pr(g(x) \\le y)$$\
+\
+By using the inverse\'a0$x = g^\{-1\}(y)$, the expression becomes:\
++1\
+$$F_\{PDF\} = Pr(x \\le g^\{-1\}(y)) = F_X(g^\{-1\}(y))$$\
+\
+\
+Step 2 ($S_2$):\'a0Differentiate with respect to\'a0$y$.\
+$$f_Y(y) = \\frac\{d\}\{dy\}[F_X(g^\{-1\}(y))]$$\
+\
+Applying the chain rule yields:\
+$$f_Y(y) = f_X(g^\{-1\}(y)) \\cdot \\frac\{d\}\{dy\}g^\{-1\}(y) = f_X(x) \\frac\{dx\}\{dy\}\\Bigg|_\{x=g^\{-1\}(y)\}$$\
+\
+\
+Derivation for a Decreasing Transformation:\
+\
+Step 1 ($S_1$):\'a0Establish the CDF considering the decreasing nature.\
+$$F_Y(y) = Pr(Y \\le y) = Pr(X \\ge g^\{-1\}(y)) = 1 - F_X(g^\{-1\}(y))$$\
+\
+\
+Step 2 ($S_2$):\'a0Differentiate the CDF.\
++1\
+$$f_Y(y) = 0 - f_X(x)\\frac\{dx\}\{dy\}\\Bigg|_\{x=g^\{-1\}(y)\}$$\
+\
+\
+Step 3 ($S_3$):\'a0Change the limits for\'a0$y$.\
+\
+Detailed Derivation for the Case\'a0$Z = X + Y$:\
+By isolating variables, we establish\'a0$Y = Z - X$\'a0and\'a0$X = Z - Y$.\
++2\
+The cumulative distribution function for\'a0$Z$\'a0is:\
+$$F_Z(z) = Pr(Z \\le z) = Pr(X + Y \\le z)$$\
+\
+The region is integrated using a strip with respect to the joint distribution\'a0$f_\{X,Y\}(x,y) dy dx$.\
+Worked Examples\
+\
+Example 1: Uniformly Distributed Continuous Random Variable (CRV)\
+Given a uniformly distributed random variable over the interval\'a0$(-1, 1)$.\
+The PDF is\'a0$f_X(x) = 1/2$\'a0for\'a0$-1 < x < 1$, and\'a0$0$\'a0otherwise. *\'a0Transformation:\'a0$y = g(x) = \\sin(\\frac\{\\pi x\}\{2\})$.\
++1\
+\
+Inverse:\'a0$x = \\frac\{2\}\{\\pi\}\\sin^\{-1\}(y)$.\
+\
+Limits calculation:\'a0* For\'a0$x = -1$,\'a0$y = \\sin(\\frac\{-\\pi\}\{2\}) = -1$.\
+For\'a0$x = 1$,\'a0$y = \\sin(\\frac\{\\pi\}\{2\}) = 1$.\
++1\
+\
+Derivative:\'a0The derivative with respect to\'a0$y$\'a0is:\
+$$\\frac\{dx\}\{dy\} = \\frac\{2\}\{\\pi\}\\frac\{1\}\{\\sqrt\{1-y^2\}\} = \\frac\{1\}\{\\pi\\sqrt\{1-y^2\}\}$$\
+\
+The goal is to find the resulting\'a0$f_Y(y)$.\
+\
+Example 2: Derived Distributions for\'a0$Z = X + Y$\
+\
+(i)\'a0Find the PDF\'a0$f_Z(z)$.\
+\
+(ii)\'a0Find\'a0$f_Z(z)$, if\'a0$X$\'a0and\'a0$Y$\'a0are independent.\
+\
+(iii)\'a0Let\'a0$X \\sim N(0,1)$\'a0and\'a0$Y \\sim N(0,1)$, prove that\'a0$Z \\sim N(0,2)$.\
+\
+(iv)\'a0If\'a0$X$\'a0and\'a0$Y$\'a0are exponential distributed random variables with a parameter, find\'a0$f_Z(z)$.\
+\
+\
+\
+\
+}

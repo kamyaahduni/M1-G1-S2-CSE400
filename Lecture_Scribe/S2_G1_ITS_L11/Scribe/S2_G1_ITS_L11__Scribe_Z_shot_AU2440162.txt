@@ -1,0 +1,294 @@
+\documentclass{article}
+\usepackage{amsmath, amssymb}
+
+\begin{document}
+
+\title{CSE400 - Fundamentals of Probability in Computing\\
+Lecture 11: Transformation of Random Variables}
+\author{Dhaval Patel, PhD\\
+Associate Professor\\
+SEAS, Ahmedabad University}
+\date{February 10, 2026}
+\maketitle
+
+\section*{1. Transformation of Random Variables}
+
+Let
+\[
+Y = g(X)
+\]
+
+We consider two cases:
+
+\subsection*{Case 1: $g(x)$ Monotonically Increasing (+ve case)}
+
+\textbf{Step 1: CDF Method}
+
+\[
+F_Y(y) = P(Y \le y)
+\]
+\[
+= P(g(X) \le y)
+\]
+\[
+= P(X \le g^{-1}(y))
+\]
+\[
+= F_X(g^{-1}(y))
+\]
+
+\textbf{Step 2: Differentiate to get PDF}
+
+\[
+f_Y(y) = \frac{d}{dy} F_X(g^{-1}(y))
+\]
+\[
+= f_X(g^{-1}(y)) \cdot \frac{d}{dy} g^{-1}(y)
+\]
+
+If $x = g^{-1}(y)$,
+
+\[
+f_Y(y) = f_X(x) \left| \frac{dx}{dy} \right|
+\]
+
+---
+
+\subsection*{Case 2: $g(x)$ Monotonically Decreasing (-ve case)}
+
+\textbf{Step 1:}
+
+\[
+F_Y(y) = P(Y \le y)
+\]
+\[
+= P(X \ge g^{-1}(y))
+\]
+\[
+= 1 - F_X(g^{-1}(y))
+\]
+
+\textbf{Step 2: PDF}
+
+\[
+f_Y(y) = f_X(x) \left| \frac{dx}{dy} \right|
+\quad \text{where } x = g^{-1}(y)
+\]
+
+---
+
+\section*{Example}
+
+Let
+\[
+X \sim \text{Uniform}(-1,1)
+\]
+
+\[
+f_X(x) =
+\begin{cases}
+\frac{1}{2}, & -1 < x < 1 \\
+0, & \text{otherwise}
+\end{cases}
+\]
+
+Define
+\[
+Y = \sin\left(\frac{\pi X}{2}\right)
+\]
+
+\textbf{Step 1: Inverse transformation}
+
+\[
+y = \sin\left(\frac{\pi x}{2}\right)
+\]
+
+\[
+x = \frac{2}{\pi} \sin^{-1}(y)
+\]
+
+\textbf{Step 2: Derivative}
+
+\[
+\frac{dx}{dy}
+=
+\frac{2}{\pi} \cdot \frac{1}{\sqrt{1 - y^2}}
+\]
+
+\textbf{Step 3: Apply formula}
+
+\[
+f_Y(y)
+=
+f_X(x) \left| \frac{dx}{dy} \right|
+\]
+
+\[
+=
+\frac{1}{2}
+\cdot
+\frac{2}{\pi}
+\cdot
+\frac{1}{\sqrt{1 - y^2}}
+\]
+
+\[
+=
+\frac{1}{\pi \sqrt{1 - y^2}},
+\quad -1 < y < 1
+\]
+
+\[
+f_Y(y) = 0 \quad \text{otherwise}
+\]
+
+---
+
+\section*{2. Function of Two Random Variables}
+
+Let
+\[
+Z = X + Y
+\]
+
+We want to find:
+
+\begin{itemize}
+    \item[(i)] $f_Z(z)$
+    \item[(ii)] $f_Z(z)$ if $X$ and $Y$ are independent
+    \item[(iii)] If $X \sim N(0,1)$ and $Y \sim N(0,1)$, prove $Z \sim N(0,2)$
+    \item[(iv)] If $X$ and $Y$ are exponential with parameter $\lambda$, find $f_Z(z)$
+\end{itemize}
+
+---
+
+\section*{Detailed Derivation for $Z = X + Y$}
+
+\[
+F_Z(z) = P(Z \le z)
+\]
+
+\[
+= P(X + Y \le z)
+\]
+
+\[
+=
+\iint_{x+y \le z}
+f_{X,Y}(x,y)
+\, dx \, dy
+\]
+
+---
+
+\subsection*{Horizontal Strip Method}
+
+\[
+F_Z(z)
+=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{z-y}
+f_{X,Y}(x,y)
+\, dx
+\, dy
+\]
+
+---
+
+\subsection*{Vertical Strip Method}
+
+\[
+F_Z(z)
+=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{z-x}
+f_{X,Y}(x,y)
+\, dy
+\, dx
+\]
+
+---
+
+\subsection*{If $X$ and $Y$ are Independent}
+
+\[
+f_{X,Y}(x,y) = f_X(x) f_Y(y)
+\]
+
+Therefore,
+
+\[
+f_Z(z)
+=
+\int_{-\infty}^{\infty}
+f_X(x)
+f_Y(z-x)
+\, dx
+\]
+
+This is called \textbf{Convolution}.
+
+---
+
+\subsection*{Normal Case}
+
+If
+\[
+X \sim N(0,1), \quad Y \sim N(0,1)
+\]
+
+Then
+
+\[
+Z = X + Y \sim N(0, 1+1) = N(0,2)
+\]
+
+Because:
+
+\[
+E(Z) = E(X) + E(Y) = 0
+\]
+
+\[
+\mathrm{Var}(Z) = \mathrm{Var}(X) + \mathrm{Var}(Y) = 2
+\]
+
+---
+
+\subsection*{Exponential Case}
+
+If
+
+\[
+f_X(x) = \lambda e^{-\lambda x}, \quad x \ge 0
+\]
+
+\[
+f_Y(y) = \lambda e^{-\lambda y}, \quad y \ge 0
+\]
+
+Then
+
+\[
+f_Z(z)
+=
+\int_0^z
+\lambda e^{-\lambda x}
+\lambda e^{-\lambda (z-x)}
+dx
+\]
+
+\[
+=
+\lambda^2 e^{-\lambda z}
+\int_0^z dx
+\]
+
+\[
+=
+\lambda^2 z e^{-\lambda z}, \quad z \ge 0
+\]
+
+This is Gamma distribution with parameters $(2,\lambda)$.
+
+\end{document}

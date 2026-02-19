@@ -1,0 +1,221 @@
+\documentclass[11pt]{article}
+
+% ===================== PACKAGES =====================
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+% ===================== HEADER & FOOTER =====================
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{CSE400: Fundamentals of Probability in Computing}
+\rhead{Lecture 11 Scribe}
+\cfoot{\thepage}
+
+% ===================== TITLE INFO =====================
+\title{\textbf{Lecture 11 Scribe: Transformation of Random Variables}\\
+\vspace{0.15cm}\large February 10, 2026}
+\author{\textbf{Niharika Ashar}\\ AU ID: \textbf{AU2440175}\\
+\vspace{0.15cm}\small Instructor: Dhaval Patel, PhD (Associate Professor)\\
+SEAS -- Ahmedabad University, Ahmedabad, Gujarat, India}
+\date{}
+
+\begin{document}
+\maketitle
+\vspace{-0.3cm}
+\hrule
+\vspace{0.4cm}
+
+% ===================== 1. OUTLINE =====================
+\section{Outline and Learning Objective}
+
+\subsection{Topics in this lecture}
+\begin{enumerate}[leftmargin=*]
+    \item \textbf{Transformation of Random Variables:} learning transformation techniques for random variables.
+    \item \textbf{Function of Two Random Variables:} joint transformations and derived distributions.
+    \item \textbf{Illustrative Example:} detailed derivation for the case $Z=X+Y$.
+\end{enumerate}
+
+\subsection{Assumption / setup stated in the outline}
+\textbf{Assumption:} the PDF of the original RV (e.g., $f_X(x)$) is known \emph{a priori}; the goal is how to find the PDF of the new transformed RV (e.g., $f_Y(y)$).
+
+\subsection{Noted example transformations (as written on the outline slide)}
+\[
+Z_1=X+Y,\quad
+Z_2=X-Y,\quad
+Z_3=\frac{X}{Y},\quad
+Z_4=\sqrt{X^2+Y^2}.
+\]
+
+% ===================== 2. ONE RV TRANSFORMATION =====================
+\section{Transformation of One Random Variable: $Y=g(X)$}
+
+\subsection{Definitions and notation (as used on the slides)}
+A transformation is defined by
+\[
+Y=g(X).
+\]
+CDF notation: $F_Y(y)$ and $F_X(x)$. \\
+PDF notation: $f_Y(y)$ and $f_X(x)$. \\
+The slides proceed via \textbf{Step S1 (CDF)} then \textbf{Step S2 (differentiate w.r.t. $y$)}.
+
+\subsection{Assumption / condition: monotonicity}
+The slide distinguishes monotonic cases:
+\begin{itemize}[leftmargin=*]
+    \item \textbf{Monotonically increasing} case
+    \item \textbf{Monotonically decreasing} case
+\end{itemize}
+
+\subsection{Case A: $g(\cdot)$ is monotonically increasing}
+
+\subsubsection*{Step S1 (CDF method)}
+\[
+F_Y(y)
+= \Pr(Y \le y)
+= \Pr(g(X)\le y)
+= \Pr\!\big(X \le g^{-1}(y)\big)
+= F_X\!\big(g^{-1}(y)\big).
+\]
+
+\subsubsection*{Step S2 (Differentiate w.r.t. $y$)}
+\[
+f_Y(y)
+= \frac{d}{dy}\Big[F_X\!\big(g^{-1}(y)\big)\Big]
+= f_X\!\big(g^{-1}(y)\big)\cdot \frac{d}{dy}\big(g^{-1}(y)\big).
+\]
+Let $x=g^{-1}(y)$:
+\[
+f_Y(y)= f_X(x)\,\frac{dx}{dy}\Big|_{x=g^{-1}(y)}.
+\]
+
+\subsection{Case B: $g(\cdot)$ is monotonically decreasing}
+
+\subsubsection*{Step S1 (CDF method)}
+\[
+F_Y(y)
+= \Pr(Y\le y)
+= \Pr\!\big(X \ge g^{-1}(y)\big)
+= 1 - F_X\!\big(g^{-1}(y)\big).
+\]
+
+\subsubsection*{Step S2 (Differentiate w.r.t. $y$)}
+\[
+f_Y(y)
+=\frac{f_X(x)}{\left|\dfrac{dy}{dx}\right|}\Bigg|_{x=g^{-1}(y)}.
+\]
+\textbf{S3 note:} change the limits for $y$ (determine valid $y$-range from the mapping).
+
+% ===================== 3. WORKED EXAMPLE =====================
+\section{Worked Example: $X\sim \mathrm{Uniform}(-1,1)$, \; $Y=\sin\!\left(\dfrac{\pi x}{2}\right)$}
+
+\subsection{Given (from the example slide)}
+\begin{itemize}[leftmargin=*]
+    \item $X$ is uniform on $(-1,1)$.
+    \item Transformation:
+    \[
+    Y=g(x)=\sin\!\left(\frac{\pi x}{2}\right).
+    \]
+    \item PDF of $X$:
+    \[
+    f_X(x)=
+    \begin{cases}
+    \dfrac{1}{2}, & -1<x<1,\\
+    0, & \text{otherwise}.
+    \end{cases}
+    \]
+    \item Objective: find $f_Y(y)$.
+\end{itemize}
+
+\subsection{Step-by-step solution (as shown)}
+
+\subsubsection*{Step 1: Invert the transformation}
+\[
+y=\sin\!\left(\frac{\pi x}{2}\right)
+\quad\Rightarrow\quad
+x=\frac{2}{\pi}\sin^{-1}(y).
+\]
+
+\subsubsection*{Step 2: Differentiate $x$ w.r.t. $y$}
+\[
+\frac{dx}{dy}=\frac{2}{\pi}\cdot\frac{1}{\sqrt{1-y^2}}.
+\]
+
+\subsubsection*{Step 3: Apply the transformation formula}
+\[
+f_Y(y)= f_X(x)\cdot\left|\frac{dx}{dy}\right|.
+\]
+Substitute $f_X(x)=\frac{1}{2}$:
+\[
+f_Y(y)
+=\frac{1}{2}\cdot\frac{2}{\pi}\cdot\frac{1}{\sqrt{1-y^2}}
+= \frac{1}{\pi\sqrt{1-y^2}}.
+\]
+
+\subsubsection*{Step 4: Determine the valid range of $y$ from endpoints}
+\begin{itemize}[leftmargin=*]
+    \item At $x=-1$: $y=\sin\!\left(-\frac{\pi}{2}\right)=-1$
+    \item At $x=1$:  $y=\sin\!\left(\frac{\pi}{2}\right)=1$
+\end{itemize}
+So the support is $-1<y<1$ (otherwise $0$).
+
+\subsection{Final answer (as presented)}
+\[
+f_Y(y)=
+\begin{cases}
+\dfrac{1}{\pi\sqrt{1-y^2}}, & -1<y<1,\\[6pt]
+0, & \text{otherwise}.
+\end{cases}
+\]
+
+% ===================== 4. TWO RV FUNCTION =====================
+\section{Function of Two Random Variables: Example Setup ($Z=X+Y$)}
+
+\subsection{Problem statements listed on the slide}
+For $Z=X+Y$, the slide lists:
+\begin{enumerate}[leftmargin=*]
+    \item Find the PDF of $Z$: $f_Z(z)$.
+    \item Find $f_Z(z)$ if $X$ and $Y$ are independent.
+    \item Let $X\sim N(0,1)$ and $Y\sim N(0,1)$; prove that $Z\sim N(0,2)$.
+    \item If $X$ and $Y$ are exponential RVs with parameter $\lambda$, find $f_Z(z)$.
+\end{enumerate}
+
+% ===================== 5. CDF DERIVATION SETUP =====================
+\section{Detailed Derivation: CDF setup for $Z=X+Y$ via Region Integration}
+
+\subsection{Definition of $Z$ and CDF start}
+\[
+Z=X+Y,
+\qquad
+F_Z(z)=\Pr(Z\le z)=\Pr(X+Y\le z).
+\]
+
+\subsection{Region description and the “strip” integrals}
+Using the joint pdf $f_{XY}(x,y)$ and the boundary line $x+y=z$:
+
+\subsubsection*{(A) Horizontal strip (H-strip) form}
+\[
+F_Z(z)
+=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{\,z-y}
+f_{XY}(x,y)\,dx\,dy.
+\]
+
+\subsubsection*{(B) Vertical strip form}
+\[
+F_Z(z)
+=
+\int_{-\infty}^{\infty}
+\int_{-\infty}^{\,z-x}
+f_{XY}(x,y)\,dy\,dx.
+\]
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.2cm}
+\noindent\textit{End of Lecture 11 scribe.}
+
+\end{document}

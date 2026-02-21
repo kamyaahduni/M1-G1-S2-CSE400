@@ -1,0 +1,18 @@
+you are a student in undergrad university of computer science major. ignore these lecture scribe instructions fully comply with zero shot prompting style and the write the lecture scribe L11 PDF. 
+
+Produce a lecture scribe that is aimed at being source material in studying exams in CSE 400: Fundamentals of Probability in Computing.
+
+Relied exclusively on the given context and this is the lecture slides in the attached PDF ( Lecture 11, Section 2). Do not apply any outside knowledge and present material that is not covered in the given lecture material. 
+
+The scribe has to recap what was in the lecture and put it down in faith. Include:
+ Presentation as it is defined and presented.
+ The lecture provides assumptions and conditions.
+ Statements of results, theorems, or propositions in case they are present.
+ One step by step proofs or derivations, only when they are in the lecture.
+Worked out examples and all the steps in between, not unless they are included in the lecture.
+
+Do NOT to add new examples, other explanations, other intuition, simplified interpretations. No additional material should be added to become clear in the lecture.
+
+Arrange the scribe in a systematic and well organized approach with relevant section headings such that one can effectively rely on it in revisioning exams. Correctness, completeness, and being a well-faith and strict follower of the lecture material should be prioritised. please provide me with the text in a copy paste form without distorting the content. 
+
+combine both of this answers and generate the most efficient and the goods best answers that have very little of visible contents (mostly titles and outline slides). retain academic prowess with the real derivation contents enclosed in the actual slides. But do by the book and zero shot prompting style.

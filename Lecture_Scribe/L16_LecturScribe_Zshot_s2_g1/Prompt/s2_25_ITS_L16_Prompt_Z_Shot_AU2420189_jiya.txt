@@ -1,0 +1,26 @@
+this is the my lecture slide pdf and other is the guideline for lecture scribe strictly follow the guideline for zero shot prompting style from the pdf and create lecture scribe notes
+
+
+this is zero shot prompting style only right?
+
+
+Generate a lecture scribe intended to serve as exam preparation reference material for CSE400 Fundamentals of Probability in Computing.
+Use only the provided lecture slides as context.
+The scribe must faithfully reconstruct the lecture content and include definitions, assumptions, theorem statements, derivations, and worked examples only when they appear in the provided lecture materials.
+Do not introduce new examples, explanations, or external knowledge that is not present in the context.
+Organize the scribe clearly with sections and headings so that a student can use it for revision for a closed-notes exam.
+The logical flow of the lecture should be preserved and the notation should match the lecture materials.
+
+
+this  strictly follows zero shot prompting style right?
+
+
+Generate a lecture scribe intended to serve as reference material for exam preparation.
+Use only the provided context. Include definitions, assumptions, theorem
+statements, proofs or derivations, and worked examples exactly as presented in the
+lecture materials. Do not introduce new examples or explanations. Organize the
+scribe clearly so it can be used for revision.
+
+
+
+

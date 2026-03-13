@@ -1,0 +1,357 @@
+\documentclass[12pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{hyperref}
+
+\geometry{margin=1in}
+
+\title{CSE400 -- Fundamentals of Probability in Computing}
+\author{Lecture Scribe: Joint Random Variables and Joint Distributions}
+\date{Lectures L15--L18 \\ Instructor: Dr. Dhaval Patel}
+
+\begin{document}
+
+\maketitle
+
+\section{Motivation for Joint Random Variables}
+
+In many practical systems, more than one random variable must be analyzed simultaneously. Studying a single random variable is often insufficient when the behavior of one variable depends on another.
+
+The lecture introduces \textbf{joint random variables} to model such relationships.
+
+\section{Examples Motivating Joint Random Variables}
+
+Several applications discussed in the lecture illustrate the need for joint analysis.
+
+\subsection{Smart Transportation}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Vehicle Speed
+\item $Y =$ Traffic Density
+\end{itemize}
+
+Question discussed:
+
+Can vehicle speed be high when traffic density is also high?
+
+Observation:  
+Speed and traffic density can be \textbf{correlated random variables}.
+
+Applications mentioned in the lecture:
+
+\begin{itemize}
+\item Adaptive traffic signals
+\item Congestion prediction
+\item Autonomous vehicle routing
+\end{itemize}
+
+\subsection{Wireless Network Performance}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Signal-to-Noise Ratio (SNR)
+\item $Y =$ Data Throughput
+\end{itemize}
+
+Throughput depends on SNR but may also be affected by network conditions such as congestion.
+
+Question discussed:
+
+If SNR is high, will throughput always be high?
+
+Applications:
+
+\begin{itemize}
+\item 5G scheduling
+\item Adaptive modulation
+\item Network planning
+\end{itemize}
+
+\subsection{Weather Prediction}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Rainfall
+\item $Y =$ Temperature
+\end{itemize}
+
+Application: weather forecasting.
+
+\subsection{Drone Delivery}
+
+Random variables:
+
+\begin{itemize}
+\item $X =$ Wind Speed
+\item $Y =$ Delivery Time
+\end{itemize}
+
+Application: UAV logistics systems.
+
+\subsection{Dice Experiment}
+
+Experiment: roll two dice.
+
+Define:
+
+\begin{itemize}
+\item $X =$ outcome of the first die
+\item $Y =$ outcome of the second die
+\end{itemize}
+
+Questions such as
+
+\[
+X + Y = 7
+\]
+
+or
+
+\[
+X > Y
+\]
+
+require analysis using a \textbf{joint probability distribution}.
+
+\section{Joint Random Variables}
+
+When two random variables $X$ and $Y$ are considered together, their probabilities are described by a \textbf{joint distribution}.
+
+This distribution specifies the probability that both variables take specific values simultaneously.
+
+\section{Discrete Case: Joint Probability Mass Function (Joint PMF)}
+
+For discrete random variables $X$ and $Y$, the joint distribution is defined by the \textbf{joint probability mass function}.
+
+\subsection*{Definition}
+
+\[
+p_{X,Y}(x,y) = P(X=x, Y=y)
+\]
+
+This represents the probability that
+
+\begin{itemize}
+\item $X = x$
+\item $Y = y$
+\end{itemize}
+
+simultaneously.
+
+\subsection*{Properties}
+
+\begin{enumerate}
+\item \textbf{Non-negativity}
+
+\[
+p_{X,Y}(x,y) \ge 0
+\]
+
+\item \textbf{Total probability}
+
+\[
+\sum_x \sum_y p_{X,Y}(x,y) = 1
+\]
+
+\end{enumerate}
+
+\section{Joint PMF Table Representation}
+
+The joint PMF for discrete variables can be represented using a \textbf{two-dimensional table}.
+
+\begin{center}
+\begin{tabular}{c|ccc}
+$Y \backslash X$ & $x_1$ & $x_2$ & $x_3$ \\
+\hline
+$y_1$ & $p(x_1,y_1)$ & $p(x_2,y_1)$ & $p(x_3,y_1)$ \\
+$y_2$ & $p(x_1,y_2)$ & $p(x_2,y_2)$ & $p(x_3,y_2)$ \\
+$y_3$ & $p(x_1,y_3)$ & $p(x_2,y_3)$ & $p(x_3,y_3)$
+\end{tabular}
+\end{center}
+
+Each entry corresponds to
+
+\[
+P(X=x_i, Y=y_j)
+\]
+
+\section{Example: Rolling Two Dice}
+
+Consider the experiment of rolling two dice.
+
+Define:
+
+\begin{itemize}
+\item $X =$ result of die 1
+\item $Y =$ result of die 2
+\end{itemize}
+
+Possible values:
+
+\[
+X,Y \in \{1,2,3,4,5,6\}
+\]
+
+Total number of outcomes:
+
+\[
+6 \times 6 = 36
+\]
+
+Each outcome can be represented as an ordered pair:
+
+\[
+(x,y)
+\]
+
+Examples:
+
+\[
+(1,1), (1,2), (1,3), \ldots, (6,6)
+\]
+
+If both dice are fair:
+
+\[
+P(X=x, Y=y) = \frac{1}{36}
+\]
+
+for every valid pair.
+
+The joint PMF therefore forms a \textbf{$6 \times 6$ table} of probabilities.
+
+\section{Continuous Case: Joint Probability Density Function (Joint PDF)}
+
+For continuous random variables, the joint distribution is described using a \textbf{joint probability density function}.
+
+Let
+
+\[
+f_{X,Y}(x,y)
+\]
+
+denote the joint PDF.
+
+\subsection*{Probability over a Region}
+
+The probability that the pair $(X,Y)$ lies within a region $R$ is
+
+\[
+P((X,Y) \in R) =
+\int\int_R f_{X,Y}(x,y)\,dx\,dy
+\]
+
+\subsection*{Properties}
+
+\begin{enumerate}
+\item \textbf{Non-negativity}
+
+\[
+f_{X,Y}(x,y) \ge 0
+\]
+
+\item \textbf{Total probability}
+
+\[
+\int_{-\infty}^{\infty}\int_{-\infty}^{\infty} f_{X,Y}(x,y)\,dx\,dy = 1
+\]
+
+\end{enumerate}
+
+\section{Geometric Interpretation}
+
+For continuous random variables, the joint PDF can be viewed as a surface over the $(x,y)$ plane.
+
+The probability that $(X,Y)$ lies within a region corresponds to the \textbf{volume under the density surface above that region}.
+
+\section{Joint Cumulative Distribution Function (Joint CDF)}
+
+The \textbf{joint cumulative distribution function} describes cumulative probabilities for two random variables.
+
+\subsection*{Definition}
+
+\[
+F_{X,Y}(x,y) = P(X \le x, Y \le y)
+\]
+
+This represents the probability that both events occur simultaneously:
+
+\begin{itemize}
+\item $X \le x$
+\item $Y \le y$
+\end{itemize}
+
+\section{Joint CDF -- Continuous Case}
+
+For continuous random variables with joint PDF $f_{X,Y}(x,y)$,
+
+\[
+F_{X,Y}(x,y)
+=
+\int_{-\infty}^{x}
+\int_{-\infty}^{y}
+f_{X,Y}(u,v)\,dv\,du
+\]
+
+\section{Joint CDF -- Discrete Case}
+
+For discrete variables,
+
+\[
+F_{X,Y}(x,y)
+=
+\sum_{u \le x} \sum_{v \le y}
+P(X=u, Y=v)
+\]
+
+\section{Properties of the Joint CDF}
+
+\subsection*{1. Bounds}
+
+\[
+0 \le F_{X,Y}(x,y) \le 1
+\]
+
+\subsection*{2. Monotonicity}
+
+The function is non-decreasing in each variable.
+
+If
+
+\[
+x_1 \le x_2
+\]
+
+then
+
+\[
+F_{X,Y}(x_1,y) \le F_{X,Y}(x_2,y)
+\]
+
+Similarly for $y$.
+
+\subsection*{3. Limit Property}
+
+As both variables approach infinity,
+
+\[
+F_{X,Y}(x,y) \rightarrow 1
+\]
+
+\subsection*{4. Boundary Property}
+
+If either variable approaches negative infinity, the probability approaches zero.
+
+Example:
+
+\[
+F_{X,Y}(-\infty, y) = 0
+\]
+
+\end{document}

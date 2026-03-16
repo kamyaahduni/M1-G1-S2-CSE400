@@ -1,0 +1,709 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Lecture Scribe --- CSE400: Fundamentals of Probability in Computing}
+\author{
+Instructor: Dhaval Patel, PhD\\
+Computer Science and Engineering (CSE)\\
+SEAS, Ahmedabad University
+}
+\date{Lecture L16 (lecture 15_17) \\}
+
+\begin{document}
+
+\maketitle
+
+\section*{Outline}
+
+\begin{itemize}
+\item Why Study Joint Random Variables?
+\item Discrete Case
+\item Joint PMF Table Representation
+\item Example: Rolling Two Dice
+\item Continuous Case
+\item Worked Example
+\item Joint Cumulative Distribution Function
+\item Continuous Case
+\item Discrete Case
+\item Properties of Joint CDF
+\end{itemize}
+
+\section{Why Study Joint Random Variables?}
+
+In science and in real life we are often interested in two or more random variables simultaneously.
+
+\subsection*{Examples}
+
+\begin{itemize}
+\item Height and weight of giraffes
+\item IQ and birthweight of children
+\item Frequency of exercise and rate of heart disease
+\item Air pollution level and respiratory illness rate
+\item Number of Facebook friends and age of members
+\end{itemize}
+
+\subsection{Example 1: Smart Transportation}
+
+Two random variables in a smart traffic system:
+
+\[
+X = \text{Vehicle Speed}
+\]
+
+\[
+Y = \text{Traffic Density}
+\]
+
+Question: Can speed be high when traffic density is also high?
+
+Conclusion: \(X\) and \(Y\) are correlated random variables.
+
+Applications in Intelligent Transportation Systems:
+
+\begin{itemize}
+\item Adaptive traffic signals
+\item Congestion prediction
+\item Autonomous vehicle routing
+\end{itemize}
+
+\subsection{Example 2: Wireless Network Performance}
+
+Two random variables:
+
+\[
+X = \text{Signal-to-Noise Ratio (SNR)}
+\]
+
+\[
+Y = \text{Data Throughput}
+\]
+
+Throughput depends on SNR. However, even if SNR is high, throughput may not always be high due to network congestion and conditional relationships.
+
+Applications:
+
+\begin{itemize}
+\item 5G scheduling
+\item Adaptive modulation
+\item Network planning
+\end{itemize}
+
+\subsection{Additional Examples}
+
+\begin{itemize}
+\item Weather prediction: \(X =\) Rainfall, \(Y =\) Temperature
+\item Drone delivery: \(X =\) Wind Speed, \(Y =\) Delivery Time
+\item Rolling two dice: events such as \(X + Y = 7\) or \(X > Y\)
+\end{itemize}
+
+These situations require joint probability distributions.
+
+\section{Discrete Case --- Joint PMF}
+
+Suppose \(X\) and \(Y\) are discrete random variables.
+
+\[
+X = \{x_1, x_2, \dots, x_n\}
+\]
+
+\[
+Y = \{y_1, y_2, \dots, y_m\}
+\]
+
+The ordered pair \((X,Y)\) takes values in the product set
+
+\[
+\{(x_1,y_1),(x_1,y_2),\dots,(x_n,y_m)\}
+\]
+
+\subsection{Definition: Joint PMF}
+
+\[
+p(x_i,y_j) = P(X=x_i, Y=y_j)
+\]
+
+This gives the probability of the joint outcome occurring simultaneously.
+
+\subsection{Joint PMF Table Representation}
+
+\[
+\begin{array}{c|cccc}
+X\backslash Y & y_1 & y_2 & \dots & y_m \\
+\hline
+x_1 & p(x_1,y_1) & p(x_1,y_2) & \dots & p(x_1,y_m) \\
+x_2 & p(x_2,y_1) & p(x_2,y_2) & \dots & p(x_2,y_m) \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+x_n & p(x_n,y_1) & p(x_n,y_2) & \dots & p(x_n,y_m)
+\end{array}
+\]
+
+\subsection{Key Properties}
+
+\[
+0 \le p(x_i,y_j) \le 1
+\]
+
+\[
+\sum_{i=1}^{n}\sum_{j=1}^{m} p(x_i,y_j) = 1
+\]
+
+\section{Example: Rolling Two Dice}
+
+Experiment: Roll two fair dice.
+
+Let
+
+\[
+X = \text{value on the first die}
+\]
+
+\[
+T = \text{total (sum) of both dice}
+\]
+
+Each outcome \((i,j)\) has probability
+
+\[
+\frac{1}{36}
+\]
+
+\subsection{Joint Probability Table of $(X,T)$}
+
+\[
+\begin{array}{c|ccccccccccc}
+X\backslash T &2&3&4&5&6&7&8&9&10&11&12 \\
+\hline
+1&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0&0&0&0 \\
+2&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0&0&0 \\
+3&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0&0 \\
+4&0&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0 \\
+5&0&0&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0 \\
+6&0&0&0&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}
+\end{array}
+\]
+
+Observation:
+
+\begin{itemize}
+\item Entries are either \(0\) or \(1/36\)
+\item \(X\) and \(T\) are not independent
+\end{itemize}
+
+\section{Continuous Case --- Joint PDF}
+
+Continuous case is analogous to the discrete case.
+
+\begin{itemize}
+\item Discrete values $\rightarrow$ Continuous intervals
+\item Joint PMF $\rightarrow$ Joint PDF
+\item Sums $\rightarrow$ Double integrals
+\end{itemize}
+
+If
+
+\[
+X \in [a,b], \quad Y \in [c,d]
+\]
+
+then
+
+\[
+(X,Y) \in [a,b] \times [c,d]
+\]
+
+\subsection{Definition: Joint PDF}
+
+A function \(f(x,y)\) is called the joint probability density function of \(X\) and \(Y\) if
+
+\[
+P((X,Y)\text{ lies in a small rectangle of area }dxdy) \approx f(x,y)dxdy
+\]
+
+\subsection{Key Properties}
+
+\[
+f(x,y) \ge 0
+\]
+
+\[
+\int_a^b \int_c^d f(x,y)\,dx\,dy = 1
+\]
+
+Note: The joint PDF may take values greater than 1 since it is a density.
+
+\section{Worked Example}
+
+Given
+
+\[
+f(x,y)=4xy
+\]
+
+for
+
+\[
+0\le x\le1, \quad 0\le y\le1
+\]
+
+Tasks:
+
+\begin{itemize}
+\item Show that it is a valid joint PDF
+\item Compute \(P(A)\)
+\end{itemize}
+
+where
+
+\[
+A=\{X<0.5, Y>0.5\}
+\]
+
+\subsection{Step 1: Validity Check}
+
+\[
+\int_0^1 \int_0^1 4xy\,dx\,dy
+\]
+
+\[
+=\int_0^1 \left(\int_0^1 4xy\,dx\right)dy
+\]
+
+\[
+=\int_0^1 2y\,dy
+\]
+
+\[
+=y^2\Big|_0^1 =1
+\]
+
+Thus it is a valid joint PDF.
+
+\subsection{Step 2: Compute $P(A)$}
+
+\[
+P(A)=\int_0^{0.5}\int_{0.5}^{1}4xy\,dy\,dx
+\]
+
+\[
+=\int_0^{0.5}2x(1-0.25)\,dx
+\]
+
+\[
+=\int_0^{0.5}\frac{3}{2}x\,dx
+\]
+
+\[
+=\frac{3}{16}
+\]
+
+\section{Joint Cumulative Distribution Function}
+
+The joint CDF is defined as
+
+\[
+F(x,y)=P(X\le x, Y\le y)
+\]
+
+\section{Continuous Case}
+
+If \(X\) and \(Y\) are continuous with density \(f(x,y)\),
+
+\[
+F(x,y)=\int_a^x\int_c^y f(u,v)\,du\,dv
+\]
+
+Recovering the joint PDF:
+
+\[
+f(x,y)=\frac{\partial^2 F(x,y)}{\partial x \partial y}
+\]
+
+\section{Discrete Case}
+
+If \(X\) and \(Y\) are discrete with joint PMF \(p(x_i,y_j)\),
+
+\[
+F(x,y)=\sum_{x_i\le x}\sum_{y_j\le y} p(x_i,y_j)
+\]
+
+\section{Properties of the Joint CDF}
+
+\begin{enumerate}
+\item \textbf{Non-decreasing}
+
+If \(x\) or \(y\) increases, then \(F(x,y)\) must stay constant or increase.
+
+\item \textbf{Lower-left limit}
+
+\[
+\lim_{(x,y)\to(-\infty,-\infty)} F(x,y)=0
+\]
+
+\item \textbf{Upper-right limit}
+
+\[
+\lim_{(x,y)\to(\infty,\infty)} F(x,y)=1
+\]
+
+\end{enumerate}
+
+\end{document}\documentclass[11pt]{article}
+
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{geometry}
+\geometry{margin=1in}
+
+\title{Lecture Scribe --- CSE400: Fundamentals of Probability in Computing}
+\author{
+Instructor: Dhaval Patel, PhD\\
+Computer Science and Engineering (CSE)\\
+SEAS, Ahmedabad University
+}
+\date{Lecture L16 (lecture 15_17) \\}
+
+\begin{document}
+
+\maketitle
+
+\section*{Outline}
+
+\begin{itemize}
+\item Why Study Joint Random Variables?
+\item Discrete Case
+\item Joint PMF Table Representation
+\item Example: Rolling Two Dice
+\item Continuous Case
+\item Worked Example
+\item Joint Cumulative Distribution Function
+\item Continuous Case
+\item Discrete Case
+\item Properties of Joint CDF
+\end{itemize}
+
+\section{Why Study Joint Random Variables?}
+
+In science and in real life we are often interested in two or more random variables simultaneously.
+
+\subsection*{Examples}
+
+\begin{itemize}
+\item Height and weight of giraffes
+\item IQ and birthweight of children
+\item Frequency of exercise and rate of heart disease
+\item Air pollution level and respiratory illness rate
+\item Number of Facebook friends and age of members
+\end{itemize}
+
+\subsection{Example 1: Smart Transportation}
+
+Two random variables in a smart traffic system:
+
+\[
+X = \text{Vehicle Speed}
+\]
+
+\[
+Y = \text{Traffic Density}
+\]
+
+Question: Can speed be high when traffic density is also high?
+
+Conclusion: \(X\) and \(Y\) are correlated random variables.
+
+Applications in Intelligent Transportation Systems:
+
+\begin{itemize}
+\item Adaptive traffic signals
+\item Congestion prediction
+\item Autonomous vehicle routing
+\end{itemize}
+
+\subsection{Example 2: Wireless Network Performance}
+
+Two random variables:
+
+\[
+X = \text{Signal-to-Noise Ratio (SNR)}
+\]
+
+\[
+Y = \text{Data Throughput}
+\]
+
+Throughput depends on SNR. However, even if SNR is high, throughput may not always be high due to network congestion and conditional relationships.
+
+Applications:
+
+\begin{itemize}
+\item 5G scheduling
+\item Adaptive modulation
+\item Network planning
+\end{itemize}
+
+\subsection{Additional Examples}
+
+\begin{itemize}
+\item Weather prediction: \(X =\) Rainfall, \(Y =\) Temperature
+\item Drone delivery: \(X =\) Wind Speed, \(Y =\) Delivery Time
+\item Rolling two dice: events such as \(X + Y = 7\) or \(X > Y\)
+\end{itemize}
+
+These situations require joint probability distributions.
+
+\section{Discrete Case --- Joint PMF}
+
+Suppose \(X\) and \(Y\) are discrete random variables.
+
+\[
+X = \{x_1, x_2, \dots, x_n\}
+\]
+
+\[
+Y = \{y_1, y_2, \dots, y_m\}
+\]
+
+The ordered pair \((X,Y)\) takes values in the product set
+
+\[
+\{(x_1,y_1),(x_1,y_2),\dots,(x_n,y_m)\}
+\]
+
+\subsection{Definition: Joint PMF}
+
+\[
+p(x_i,y_j) = P(X=x_i, Y=y_j)
+\]
+
+This gives the probability of the joint outcome occurring simultaneously.
+
+\subsection{Joint PMF Table Representation}
+
+\[
+\begin{array}{c|cccc}
+X\backslash Y & y_1 & y_2 & \dots & y_m \\
+\hline
+x_1 & p(x_1,y_1) & p(x_1,y_2) & \dots & p(x_1,y_m) \\
+x_2 & p(x_2,y_1) & p(x_2,y_2) & \dots & p(x_2,y_m) \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+x_n & p(x_n,y_1) & p(x_n,y_2) & \dots & p(x_n,y_m)
+\end{array}
+\]
+
+\subsection{Key Properties}
+
+\[
+0 \le p(x_i,y_j) \le 1
+\]
+
+\[
+\sum_{i=1}^{n}\sum_{j=1}^{m} p(x_i,y_j) = 1
+\]
+
+\section{Example: Rolling Two Dice}
+
+Experiment: Roll two fair dice.
+
+Let
+
+\[
+X = \text{value on the first die}
+\]
+
+\[
+T = \text{total (sum) of both dice}
+\]
+
+Each outcome \((i,j)\) has probability
+
+\[
+\frac{1}{36}
+\]
+
+\subsection{Joint Probability Table of $(X,T)$}
+
+\[
+\begin{array}{c|ccccccccccc}
+X\backslash T &2&3&4&5&6&7&8&9&10&11&12 \\
+\hline
+1&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0&0&0&0 \\
+2&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0&0&0 \\
+3&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0&0 \\
+4&0&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0&0 \\
+5&0&0&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&0 \\
+6&0&0&0&0&0&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}&\frac{1}{36}
+\end{array}
+\]
+
+Observation:
+
+\begin{itemize}
+\item Entries are either \(0\) or \(1/36\)
+\item \(X\) and \(T\) are not independent
+\end{itemize}
+
+\section{Continuous Case --- Joint PDF}
+
+Continuous case is analogous to the discrete case.
+
+\begin{itemize}
+\item Discrete values $\rightarrow$ Continuous intervals
+\item Joint PMF $\rightarrow$ Joint PDF
+\item Sums $\rightarrow$ Double integrals
+\end{itemize}
+
+If
+
+\[
+X \in [a,b], \quad Y \in [c,d]
+\]
+
+then
+
+\[
+(X,Y) \in [a,b] \times [c,d]
+\]
+
+\subsection{Definition: Joint PDF}
+
+A function \(f(x,y)\) is called the joint probability density function of \(X\) and \(Y\) if
+
+\[
+P((X,Y)\text{ lies in a small rectangle of area }dxdy) \approx f(x,y)dxdy
+\]
+
+\subsection{Key Properties}
+
+\[
+f(x,y) \ge 0
+\]
+
+\[
+\int_a^b \int_c^d f(x,y)\,dx\,dy = 1
+\]
+
+Note: The joint PDF may take values greater than 1 since it is a density.
+
+\section{Worked Example}
+
+Given
+
+\[
+f(x,y)=4xy
+\]
+
+for
+
+\[
+0\le x\le1, \quad 0\le y\le1
+\]
+
+Tasks:
+
+\begin{itemize}
+\item Show that it is a valid joint PDF
+\item Compute \(P(A)\)
+\end{itemize}
+
+where
+
+\[
+A=\{X<0.5, Y>0.5\}
+\]
+
+\subsection{Step 1: Validity Check}
+
+\[
+\int_0^1 \int_0^1 4xy\,dx\,dy
+\]
+
+\[
+=\int_0^1 \left(\int_0^1 4xy\,dx\right)dy
+\]
+
+\[
+=\int_0^1 2y\,dy
+\]
+
+\[
+=y^2\Big|_0^1 =1
+\]
+
+Thus it is a valid joint PDF.
+
+\subsection{Step 2: Compute $P(A)$}
+
+\[
+P(A)=\int_0^{0.5}\int_{0.5}^{1}4xy\,dy\,dx
+\]
+
+\[
+=\int_0^{0.5}2x(1-0.25)\,dx
+\]
+
+\[
+=\int_0^{0.5}\frac{3}{2}x\,dx
+\]
+
+\[
+=\frac{3}{16}
+\]
+
+\section{Joint Cumulative Distribution Function}
+
+The joint CDF is defined as
+
+\[
+F(x,y)=P(X\le x, Y\le y)
+\]
+
+\section{Continuous Case}
+
+If \(X\) and \(Y\) are continuous with density \(f(x,y)\),
+
+\[
+F(x,y)=\int_a^x\int_c^y f(u,v)\,du\,dv
+\]
+
+Recovering the joint PDF:
+
+\[
+f(x,y)=\frac{\partial^2 F(x,y)}{\partial x \partial y}
+\]
+
+\section{Discrete Case}
+
+If \(X\) and \(Y\) are discrete with joint PMF \(p(x_i,y_j)\),
+
+\[
+F(x,y)=\sum_{x_i\le x}\sum_{y_j\le y} p(x_i,y_j)
+\]
+
+\section{Properties of the Joint CDF}
+
+\begin{enumerate}
+\item \textbf{Non-decreasing}
+
+If \(x\) or \(y\) increases, then \(F(x,y)\) must stay constant or increase.
+
+\item \textbf{Lower-left limit}
+
+\[
+\lim_{(x,y)\to(-\infty,-\infty)} F(x,y)=0
+\]
+
+\item \textbf{Upper-right limit}
+
+\[
+\lim_{(x,y)\to(\infty,\infty)} F(x,y)=1
+\]
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,344 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 FOR GENERATING ZERO SHOT PROMPT \
+\
+# TASK: Generate a Zero-Shot Prompt for Lecture Scribe Generation\
+\
+I am a second-year computer science student in **CSE 400: Fundamentals of Probability in Computing** at Ahmedabad University. My group is assigned the **Zero-Shot Prompting Style** for the entire semester.\
+\
+## What I Need From You\
+\
+I need you to generate a **zero-shot prompt** that I will later use in a fresh chat session with lecture notes attached. This zero-shot prompt must instruct a language model to produce a lecture scribe that strictly follows the official course guidelines below.\
+\
+## Official Course Guidelines (Must Be Followed Exactly)\
+\
+### 1. Purpose of a Lecture Scribe\
+The scribe must be a **faithful, exam-ready reconstruction** of the lecture. It must enable a student to:\
+- Recall definitions and notation\
+- Reconstruct proofs and derivations step by step\
+- Follow worked examples with intermediate steps\
+- Understand logical dependencies between concepts\
+\
+The scribe should answer: *"If I study only this document, can I reliably revise what was taught?"*\
+\
+### 2. Required Content (Conditional on Presence)\
+The scribe **must** include the following elements **exactly as they appear** in the provided context:\
+- Definitions and notation\
+- Assumptions and conditions\
+- Statements of theorems or results\
+- **Proofs or proof sketches** (only when present)\
+- **Mathematical derivations** (only when present)\
+- **Worked examples with intermediate steps** (only when present)\
+\
+**Critical:** Include these elements **ONLY if they appear in the provided context.** Do not invent, supplement, or complete missing proofs, derivations, or examples under any circumstances.\
+\
+### 3. Content Restrictions\
+The scribe must **not** include:\
+- Creative explanations or intuition not explicitly discussed\
+- Simplified tutorials or textbook rewrites\
+- Solutions to unseen problems\
+- Any outside knowledge or external context\
+\
+**Every sentence, equation, and logical step must be directly traceable to the provided context.**\
+\
+### 4. Context Rules\
+The **only** allowed context is:\
+- The attached lecture slides or PDF\
+- Relevant textbook content explicitly referenced in the lecture materials\
+\
+No solved material not shown in lecture, no instructor annotations, no reference scribes, and no external examples.\
+\
+### 5. Zero-Shot Prompting Style Requirements\
+\
+**Definition:** Zero-shot prompting means providing task instructions only \'96 no examples, demonstrations, or reasoning scaffolds. The model must infer how to perform the task solely from the instructions.\
+\
+**Required Components in a Zero-Shot Prompt:**\
+1. **Purpose:** Explicit statement that the scribe is for exam preparation and faithful revision.\
+2. **Scope Constraints:** Clear delineation of what content is allowed (only from context) and what is forbidden (invention, outside knowledge).\
+3. **Structural Expectations:** The scribe must mirror the lecture\'92s logical flow with clear sections and headings.\
+\
+**Mandatory Elements (Must Appear in the Generated Zero-Shot Prompt):**\
+- State that the scribe is intended as **exam-ready reference material**.\
+- Instruct inclusion of proofs, derivations, and worked examples **ONLY when they appear** in the provided context.\
+- Emphasize **strict faithfulness** \'96 no outside knowledge, no invention.\
+- Require that **every sentence, equation, and logical step be traceable** to the context.\
+- Explicitly **prohibit** the use of phrases like \'93for example\'94 or \'93like this\'94 (which could introduce invented content).\
+- Structure the output with clear headings and sections that follow the lecture\'92s flow.\
+\
+**Forbidden Elements (Do NOT Include in the Generated Zero-Shot Prompt):**\
+- No example scribes or demonstrations\
+- No sample equations, partial proofs, or worked steps\
+- No requests for the model to explain its reasoning process\
+- No phrases such as \'93for example\'94 or \'93like this\'94\
+- No elements from other prompting styles (one-shot, CoT, self-consistency)\
+\
+### 6. Global Rules\
+- Only **one** prompt may be used in the scribe generation chat; no follow-up prompts or refinements.\
+- The generated zero-shot prompt must be **self-contained** and work in a single submission.\
+- No borrowing elements from other prompting styles.\
+\
+## What the Generated Zero-Shot Prompt Must Do\
+\
+The zero-shot prompt you generate should:\
+\
+1. **Be a complete instruction set** \'96 ready to copy, paste, and use with lecture notes attached.\
+2. **Adhere to all zero-shot rules** \'96 no examples, no demonstrations, no reasoning scaffolds.\
+3. **Include the required components** \'96 purpose, scope constraints, structural expectations.\
+4. **Incorporate the conditional content requirement** \'96 \'93only when they appear in the provided context\'94 must be explicitly stated.\
+5. **Contain the faithfulness constraints** \'96 traceability, prohibition on invention, no outside knowledge.\
+6. **Be a single, non\uc0\u8209 iterative prompt** \'96 no requests for clarification or follow-up.\
+7. **Contain no forbidden elements** \'96 no \'93for example\'94, no examples, no reasoning requests.\
+\
+## Output Format\
+\
+Please provide the zero-shot prompt inside a single fenced code block labeled `prompt`. The prompt should be ready for me to copy and use when I later upload my lecture notes.\
+\
+## Example for Structural Reference Only (Not to Be Copied)\
+\
+The guidelines give this illustrative example of a valid zero-shot prompt:\
+> \'93Generate a lecture scribe intended to serve as reference material for exam preparation. Use only the provided context. Include definitions, assumptions, theorem statements, proofs or derivations, and worked examples exactly as presented in the lecture materials. Do not introduce new examples or explanations. Organize the scribe clearly so it can be used for revision.\'94\
+\
+Your generated prompt should be more comprehensive, incorporating the detailed requirements above \'96 especially the **conditional inclusion** language and the **explicit prohibition of invention**.\
+\
+Begin now.\
+\
+\
+ZERO SHOT PROMPT FOR LECTURE SCRIBE \
+\
+Generate a comprehensive lecture scribe based strictly on the attached lecture materials for CSE 400: Fundamentals of Probability in Computing.\'a0\
+\
+**Purpose:**\
+This scribe must serve as a faithful, exam-ready reconstruction of the lecture. It must enable a student to reliably revise what was taught, recall definitions and notation, reconstruct proofs step-by-step, follow worked examples, and understand logical dependencies between concepts.\
+\
+**Scope Constraints & Traceability:**\
+You are restricted entirely to the provided context. Every single sentence, equation, and logical step in your output must be directly traceable to the attached materials. You must not include any outside knowledge, external context, simplified tutorials, textbook rewrites, or solutions to unseen problems. Do not include creative explanations or intuition that was not explicitly discussed in the source material. You are strictly prohibited from using phrases such as "for example" or "like this" to introduce any concepts not present in the text.\
+\
+**Required Content & Conditional Inclusion:**\
+Extract and structure the following elements exactly as they appear in the source text:\
+- Definitions and notation\
+- Assumptions and conditions\
+- Statements of theorems or results\
+\
+You must include the following elements ONLY when they appear in the provided context:\
+- Proofs or proof sketches\
+- Mathematical derivations\
+- Worked examples with intermediate steps\
+\
+Under no circumstances should you invent, supplement, or complete missing proofs, derivations, or worked steps. If a proof or derivation is incomplete in the source material, document it exactly as it is without attempting to finish it.\
+\
+**Structural Expectations:**\
+Organize the scribe using clear headings, subheadings, and sections that strictly mirror the logical flow and progression of the lecture material. Ensure the formatting allows for highly efficient exam revision.\
+\
+\
+FOR LATEX CONVERSION\
+\
+# TASK: Convert the Provided Lecture Scribe into a Compilable LaTeX Document\
+\
+I have a lecture scribe (plain text) that was generated in a previous, separate chat session. I now need you to convert it into a **complete, compilable LaTeX document** while preserving the content **exactly** as given \'96 no additions, deletions, or edits of any kind.\
+\
+## Input\
+I will paste the lecture scribe text below this prompt. It contains definitions, theorems, proofs, examples, and mathematical notation in plain text.\
+\
+## Output Requirements\
+\
+### 1. Exact Content Preservation\
+- **Do not alter, rephrase, summarize, or restructure the content** in any way.\
+- The LaTeX document must contain the **identical wording, order, and logical structure** as the input scribe.\
+- Convert plain\uc0\u8209 text math notation to proper LaTeX math (e.g., `P(A|B) = P(A\u8745 B)/P(B)` \u8594  `$P(A|B) = \\frac\{P(A \\cap B)\}\{P(B)\}$`), but do **not** change the mathematical meaning or add new equations.\
+\
+### 2. LaTeX Document Structure\
+- Provide a **complete LaTeX document** with a proper preamble, including:\
+\'a0 - `\\documentclass\{article\}`\
+\'a0 - `\\usepackage\{amsmath, amssymb, amsthm, geometry\}`\
+\'a0 - `\\usepackage\{graphicx\}` (optional, if the scribe mentions diagrams)\
+- Define theorem environments for consistency:\
+- Use `\\begin\{proof\}...\\end\{proof\}` for proofs.\
+- Use `\\section\{\}`, `\\subsection\{\}`, etc. to match the scribe\'92s heading structure.\
+- Use `\\begin\{align*\}...\\end\{align*\}` or `\\[ ... \\]` for displayed equations as appropriate.\
+- Ensure all LaTeX is correctly escaped and compilable without errors.\
+\
+### 3. Metadata\
+- Include a title, author (e.g., `\\author\{Scribe Notes\}`), and date (`\\date\{\\today\}`) in the document.\
+- Do **not** add any commentary, footnotes, or explanations outside the scribe\'92s content.\
+\
+## Important Constraints (Separate Chat Requirement)\
+- This conversion must be performed in a **fresh chat session**, separate from the chat used to generate the scribe.\
+- You will receive the scribe text **only once**; produce the LaTeX output in a single response.\
+- The final LaTeX document must be ready for me to save as a `.tex` file and compile (e.g., with `pdflatex`).\
+\
+## Input Scribe (Paste Below)\
+\
+Here is the comprehensive lecture scribe for CSE 400: Fundamentals of Probability in Computing, based entirely on the provided materials.\
+CSE 400 - Fundamentals of Probability in Computing\
+\
+Lecture 21 and 22: Inequalities and Tail Bound\'a0Instructor:\'a0Dhaval Patel, PhD\'a0\
+1. Tails and Motivation for Tail Bounds\
+1.1 Definition of a Tail\
+\
+Definition:\'a0The tail of a random variable\'a0$X$\'a0is defined as\'a0$P\\\{X>x\\\}$.\
+1.2 Motivation: Why do we care about tails?\
+While the\'a0mean\'a0provides information about average behavior (which is generally easy to compute), the\'a0tail\'a0tells us about rare extreme events (which are harder to compute).\
+Examples of tail events in computing include jobs being delayed by more than 24 hours or network packets being dropped due to a full buffer.\
+Tails are fundamentally hard to compute because exact computations often require summing many small probabilities (e.g., long, complicated sums involving Binomial or Poisson distributions).\
+\
+Key Idea:\'a0Instead of computing the exact value, we find an\'a0upper bound.\'a0This is easier to compute and still provides a strict mathematical guarantee.\'a0We approximate safely instead of computing exactly.\
+2. Markov's Inequality\
+2.1 Definition and Intuition\
+\
+Key Idea:\'a0Markov's inequality uses\'a0only the mean\'a0to bound the probability of large deviations.\
+Markov Inequality:\'a0For a non-negative random variable\'a0$X$\'a0and\'a0$a > 0$:\
+\
+$P(X \\ge a) \\le \\frac\{E[X]\}\{a\}$\
+2.2 Proof (Idea)\
+Consider only the region where\'a0$X \\ge a$\'a0and replace\'a0$X$\'a0by\'a0$a$.\
+\
+$E[X] = \\sum_\{x=0\}^\{\\infty\}x \\cdot p_X(x)$\
+\
+$\\ge \\sum_\{x=a\}^\{\\infty\}x \\cdot p_X(x)$\
+\
+$\\ge \\sum_\{x=a\}^\{\\infty\}a \\cdot p_X(x)$\
+\
+$= a \\cdot P(X \\ge a)$\
+2.3 Worked Examples: Markov's Inequality\
+Example 1: Running Coin Flip Example\
+Scenario:\'a0Flip a fair coin\'a0$n$\'a0times.\'a0What is the tail bound on the probability of getting at least\'a0$3n/4$heads?\'a0\
+\
+Step 1:\'a0$X = \\text\{Number of Heads\} \\sim \\text\{Binomial\}(n, 1/2)$, so\'a0$\\mu = E[X] = n/2$.\
+\
+Step 2:\'a0Apply Markov's:\'a0$P\\\{X \\ge \\frac\{3\}\{4\}n\\\} \\le \\frac\{\\mu\}\{\\frac\{3\}\{4\}n\} = \\frac\{n/2\}\{3n/4\} = \\frac\{2\}\{3\}$.\
+\
+Result:\'a0This is a terrible bound because it does not involve\'a0$n$\'a0(it is constant).\
+Example 2: Exam Grades\
+Problem:\'a0The average grade on the first probability exam is 70%. The "A" grade cutoff is 90%.\'a0Find an upper bound on the fraction of students who receive an "A".\'a0\
+Step 1:\'a0Let\'a0$X \\ge 0$\'a0be the student grade.\'a0The mean is\'a0$\\mu = E[X] = 70$.\
+\
+Step 2:\'a0State Markov's Inequality:\'a0$P(X \\ge a) \\le \\frac\{E[X]\}\{a\}$.\
+\
+Step 3:\'a0Substitute\'a0$\\mu = 70$, threshold\'a0$a = 90$:\'a0$P(X \\ge 90) \\le \\frac\{70\}\{90\}$.\
+Step 4:\'a0Simplify to\'a0$7/9$.\'a0Result: At most 77.8% of students can receive an "A" ($P(X \\ge 90) \\le 0.778$).\
+Example 3: Server Request Load\
+Problem:\'a0A server processes an average of 5,000 requests per second.\'a0Find an upper bound on the probability that the server receives 20,000 or more requests in a given second.\'a0\
+Step 1:\'a0Let\'a0$X$\'a0be requests/sec.\'a0$\\mu = E[X] = 5,000$.\
+\
+Step 2:\'a0Define threshold\'a0$a = 20,000$.\
+\
+Step 3:\'a0$P(X \\ge 20,000) \\le \\frac\{5,000\}\{20,000\}$.\
+Step 4:\'a0Simplify.\'a0$P(X \\ge 20,000) \\le 1/4 = 0.25$.\'a0At most a 25% chance of\'a0$\\ge 20,000$\'a0requests.\
+3. Chebyshev's Inequality\
+3.1 Definition and Intuition\
+\
+Key Idea:\'a0Uses the mean + variance to control the deviation from the mean.\
+\
+Chebyshev Inequality:\'a0$P(|X - \\mu| \\ge a) \\le \\frac\{Var(X)\}\{a^2\}$\
+3.2 Proof (Idea)\
+Apply Markov's inequality on\'a0$(X-\\mu)^2$.\
+\
+$P(|X-\\mu| \\ge a) = P((X-\\mu)^2 \\ge a^2)$\
+\
+$\\le \\frac\{E[(X-\\mu)^2]\}\{a^2\} = \\frac\{Var(X)\}\{a^2\}$\
+3.3 Worked Examples: Chebyshev's Inequality\
+Example 1: Running Coin Flip Example\
+Setup:\'a0$X \\sim \\text\{Binomial\}(n, 1/2)$.\'a0$\\mu = \\frac\{n\}\{2\}$,\'a0$Var(X) = \\frac\{n\}\{4\}$.\
+\
+Application:\'a0$P(X \\ge \\frac\{3\}\{4\}n) = \\frac\{1\}\{2\}P(|X - \\frac\{n\}\{2\}| \\ge \\frac\{n\}\{4\}) \\le \\frac\{2\}\{n\}$.\
+\
+Key Insight:\'a0This bound decreases as\'a0$n$\'a0increases, making it much better than Markov's bound, which remained constant.\
+Example 2: Exam Grades with Variance\
+Problem:\'a0Average grade is 70%, standard deviation is 5%. "A" cutoff is 90%.\'a0Obtain a tighter bound on "A" students.\'a0\
+\
+Step 1:\'a0$\\mu = 70$,\'a0$\\sigma = 5 \\Rightarrow \\sigma^2 = 25$.\
+Step 2:\'a0$X \\ge 90 \\Rightarrow |X - 70| \\ge 20$.\'a0Apply one-sided bound:\'a0$P(X \\ge 90) \\le P(|X - 70| \\ge 20)$.\
+Step 3 & 4:\'a0Substitute\'a0$a=20$\'a0and\'a0$\\sigma^2=25$.\'a0$P(|X - 70| \\ge 20) \\le \\frac\{25\}\{400\} = \\frac\{1\}\{16\} = 0.0625$.\
+\
+Result:\'a0Much tighter than Markov's bound of 0.778.\
+Example 3: Network Latency SLA\
+Problem:\'a0Average latency\'a0$E[X] = 50$\'a0ms, variance\'a0$Var(X) = 16\\text\{ ms\}^2$.\'a0Bound probability latency falls outside\'a0$[30\\text\{ ms\}, 70\\text\{ ms\}]$.\'a0\
+Step 1 & 2:\'a0$\\mu = 50, \\sigma^2 = 16$. Failure condition:\'a0$X \\notin [30, 70] \\iff |X - 50| [cite_start]\\ge 20$.\
+Step 3 & 4:\'a0Apply Chebyshev with\'a0$a=20$.\'a0$P(|X - 50| \\ge 20) \\le \\frac\{16\}\{20^2\} = \\frac\{16\}\{400\} = \\frac\{1\}\{25\} = 0.04$.\
+4. Chernoff Bound and Poisson Tail\
+4.1 Definition and Intuition\
+Key Idea:\'a0Uses the transformation\'a0$e^\{tX\}$\'a0to bound tails.\'a0The exponential function grows very fast, heavily amplifying large values of\'a0$X$, which yields a tighter tail bound.\
+\
+Core Trick (Transformation):\'a0$P(X \\ge a) = P(e^\{tX\} \\ge e^\{ta\})$.\
+Because\'a0$e^\{tX\}$\'a0is strictly non-negative, we can apply Markov's Inequality to it:\
+\
+$P(e^\{tX\} \\ge e^\{ta\}) \\le \\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}$\
+\
+Chernoff Bound (Final Form):\'a0$P(X \\ge a) \\le \\min_\{t>0\}\\\{\\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}\\\}$.\
+Lower Tail:\'a0For left tail bounds, use a trick with\'a0$t<0$.\'a0$P(X \\le a) \\le \\min_\{t<0\}\\\{\\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}\\\}$.\
+4.2 Proof: Chernoff Bound for Poisson Tail\
+\
+Goal:\'a0Bound the tail of\'a0$X \\sim \\text\{Poisson\}(\\lambda)$.\
+Step 1:\'a0Derive\'a0$E[e^\{tX\}]$\'a0for\'a0$t > 0$:\
+\
+$E[e^\{tX\}] = \\sum_\{i=0\}^\{\\infty\}e^\{ti\} \\cdot \\frac\{e^\{-\\lambda\}\\lambda^i\}\{i!\}$\'a0$= e^\{-\\lambda\}\\sum_\{i=0\}^\{\\infty\}\\frac\{(\\lambda e^t)^i\}\{i!\}$\'a0$= e^\{-\\lambda\} \\cdot e^\{\\lambda e^t\} = e^\{\\lambda(e^t - 1)\}$\
+Step 2:\'a0Let\'a0$a > \\lambda$.\'a0To minimize the bound\'a0$P\\\{X \\ge a\\\} \\le \\min_\{t>0\}\\\{e^\{\\lambda(e^t - 1) - ta\}\\\}$, we minimize the exponent.\
+The exponent is minimized at\'a0$t = \\ln(a/\\lambda)$.\
+\
+Result:\'a0$P\\\{X \\ge a\\\} \\le e^\{\\lambda(\\frac\{a\}\{\\lambda\} - 1) - a \\ln(\\frac\{a\}\{\\lambda\})\} = e^\{a-\\lambda\} \\cdot (\\frac\{\\lambda\}\{a\})^a$.\
+4.3 Worked Examples: Chernoff Bound\
+Example 1: Binomial Lower Tail\
+Problem:\'a0$p=0.5$,\'a0$n=20$.\'a0Using\'a0$P(X \\le (1-\\delta)\\mu) \\le e^\{-\\mu\\delta^2/2\}$, bound the probability of zero job offers.\'a0\
+\
+Step 1:\'a0$X \\sim \\text\{Binomial\}(20, 0.5)$,\'a0$\\mu = np = 10$.\
+\
+Step 2:\'a0Set\'a0$(1-\\delta)\\mu = 0$\'a0and solve for\'a0$\\delta \\Rightarrow \\delta = 1$.\
+\
+Step 3 & 4:\'a0$P(X \\le 0) \\le \\exp(-\\frac\{10\}\{2\}) = e^\{-5\} \\approx 0.0067$.\
+Example 2: Deriving the Lower-Tail Chernoff Bound\
+Step 1:\'a0Choose\'a0$t < 0$.\'a0Multiplying by negative\'a0$t$\'a0flips the inequality:\'a0$P(X \\le a) = P(tX \\ge ta)$.\
+\
+Step 2:\'a0Exponentiate both sides:\'a0$P(tX \\ge ta) = P(e^\{tX\} \\ge e^\{ta\})$.\
+\
+Step 3:\'a0Apply Markov's Inequality:\'a0$P(e^\{tX\} \\ge e^\{ta\}) \\le \\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}$.\
+\
+Step 4:\'a0Minimize over\'a0$t<0$:\'a0$P(X \\le a) \\le \\min_\{t<0\}\\\{e^\{-ta\}E[e^\{tX\}]\\\}$.\
+5. Jensen's Inequality\
+5.1 Convex Functions Definition\
+Definition:\'a0A function\'a0$g(x)$\'a0is convex on interval\'a0$S$\'a0if, for any\'a0$x_1, x_2 \\in S$\'a0and\'a0$\\alpha \\in [0, 1]$, we have:\
+\
+$g(\\alpha x_1 + (1-\\alpha)x_2) \\le \\alpha g(x_1) + (1-\\alpha)g(x_2)$\
+5.2 Jensen's Theorem and Intuition\
+Theorem (Jensen's Inequality):\'a0If\'a0$g(x)$\'a0is convex on an interval\'a0$S$\'a0and\'a0$X$\'a0takes values in\'a0$S$, then:\
+\
+$g(E[X]) \\le E[g(X)]$\
+Interpretation:\'a0Averaging first yields a smaller value; applying the convex function first yields a larger value.\'a0Convex functions push expectation upwards.\
+We already know variance is non-negative ($Var(X) = E[X^2] - E[X]^2 \\ge 0 \\Rightarrow E[X^2] \\ge E[X]^2$).\'a0Jensen's inequality generalises this: for any positive random variable\'a0$X$\'a0and\'a0$a \\in \\mathbb\{R\}$,\'a0$E[X^a] \\ge E[X]^a$.\
+5.3 Worked Example: Verifying Jensen's Inequality Numerically\
+Problem:\'a0Let\'a0$X = 1$\'a0with probability 0.5, and\'a0$X = 3$\'a0with probability 0.5.\'a0Verify Jensen's for\'a0$g(x) = x^2$.\'a0\
+Step 1:\'a0Compute expectation.\'a0$E[X] = 0.5(1) + 0.5(3) = 2$.\
+\
+Apply function after averaging:\'a0$g(E[X]) = (2)^2 = 4$.\
+\
+Apply function first:\'a0$E[g(X)] = 0.5(1^2) + 0.5(3^2) = 5$.\
+\
+Result:\'a0Since\'a0$4 \\le 5$, the inequality holds.\
+6. Case Study: E-Commerce System Failures\
+Scenario:\'a0During an e-commerce sale event, millions of users log in. While average traffic is manageable, sudden and extreme traffic spikes cause server queues to overflow, crashing the system.\
+Goal:\'a0Design server capacity ($C$) not for "average" load, but for extreme "tail" spikes.\
+Mapping Demand to Probability\
+Demand ($X$):\'a0Incoming requests per second.\
+Capacity ($C$):\'a0Maximum requests the server cluster can handle.\
+Failure Event:\'a0$X \\ge C$.\
+Service Level Agreement (SLA):\'a0Management demands 99% uptime, requiring\'a0$P(X \\ge C) \\le 0.01$.\
+Provisioning Hardware Based on Statistical Knowledge\
+Using Markov's Bound (Only average known):\
+Telemetry shows average load\'a0$\\mu = 10,000\\text\{ req/sec\}$.\
+$P(X \\ge C) \\le \\frac\{\\mu\}\{C\} = 0.01 \\Rightarrow C = 1,000,000\\text\{ req/sec\}$.\
+System Inference:\'a0Relying strictly on the mean forces you to buy\'a0$100\\times$\'a0more hardware to be safe.\
+Using Chebyshev's Bound (Average and Variance known):\
+$\\mu = 10,000\\text\{ req/sec\}$,\'a0$\\sigma = 2,000\\text\{ req/sec\}$.\
+$P(|X - \\mu| \\ge a) \\le \\frac\{\\sigma^2\}\{a^2\}$, where\'a0$a = C - \\mu$.\
+Solve:\'a0$\\frac\{2000^2\}\{(C - 10000)^2\} = 0.01 \\Rightarrow C = 30,000\\text\{ req/sec\}$.\
+System Inference:\'a0Capacity requirement reduced from\'a0$1,000,000$\'a0to\'a0$30,000$.\
+Using Chernoff Bound (Exact traffic distribution known):\
+Traffic follows a Poisson distribution.\
+$P(X \\ge C) \\le e^\{-I(C)\} \\le 0.01 \\Rightarrow C \\approx 14,500\\text\{ req/sec\}$.\
+System Inference:\'a0Chernoff provides precise scaling with minimal hardware.\
+The Golden Rule of Probability in Systems\
+More statistical information\'a0$\\Rightarrow$\'a0Tighter bounds\'a0$\\Rightarrow$\'a0Lower hardware costs.}

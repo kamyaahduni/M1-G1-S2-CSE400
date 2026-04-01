@@ -1,0 +1,262 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 \\documentclass\{article\}\
+\\usepackage\{amsmath, amssymb, amsthm, geometry\}\
+\\usepackage\{graphicx\}\
+\
+\\title\{CSE 400 - Fundamentals of Probability in Computing \\\\ \\large Lecture 21 and 22: Inequalities and Tail Bound\}\
+\\author\{Instructor: Dhaval Patel, PhD \\\\ Scribe Notes\}\
+\\date\{\\today\}\
+\
+\\newtheorem\{definition\}\{Definition\}\
+\\newtheorem\{theorem\}\{Theorem\}\
+\
+\\begin\{document\}\
+\
+\\maketitle\
+\
+\\noindent Here is the comprehensive lecture scribe for CSE 400: Fundamentals of Probability in Computing, based entirely on the provided materials.\
+\
+\\section\{Tails and Motivation for Tail Bounds\}\
+\
+\\subsection\{Definition of a Tail\}\
+\\textbf\{Definition:\} The tail of a random variable $X$ is defined as $P\\\{X>x\\\}$.\
+\
+\\subsection\{Motivation: Why do we care about tails?\}\
+While the \\textbf\{mean\} provides information about average behavior (which is generally easy to compute), the \\textbf\{tail\} tells us about rare extreme events (which are harder to compute).\
+\
+Examples of tail events in computing include jobs being delayed by more than 24 hours or network packets being dropped due to a full buffer.\
+\
+Tails are fundamentally hard to compute because exact computations often require summing many small probabilities (e.g., long, complicated sums involving Binomial or Poisson distributions).\
+\
+\\textbf\{Key Idea:\} Instead of computing the exact value, we find an \\textbf\{upper bound.\} This is easier to compute and still provides a strict mathematical guarantee. We approximate safely instead of computing exactly.\
+\
+\\section\{Markov's Inequality\}\
+\
+\\subsection\{Definition and Intuition\}\
+\\textbf\{Key Idea:\} Markov's inequality uses \\textbf\{only the mean\} to bound the probability of large deviations.\
+\
+\\textbf\{Markov Inequality:\} For a non-negative random variable $X$ and $a > 0$:\
+\\[ P(X \\ge a) \\le \\frac\{E[X]\}\{a\} \\]\
+\
+\\subsection\{Proof (Idea)\}\
+\\begin\{proof\}\
+Consider only the region where $X \\ge a$ and replace $X$ by $a$.\
+\\begin\{align*\}\
+E[X] &= \\sum_\{x=0\}^\{\\infty\}x \\cdot p_X(x) \\\\\
+&\\ge \\sum_\{x=a\}^\{\\infty\}x \\cdot p_X(x) \\\\\
+&\\ge \\sum_\{x=a\}^\{\\infty\}a \\cdot p_X(x) \\\\\
+&= a \\cdot P(X \\ge a)\
+\\end\{align*\}\
+\\end\{proof\}\
+\
+\\subsection\{Worked Examples: Markov's Inequality\}\
+\
+\\noindent\\textbf\{Example 1: Running Coin Flip Example\}\\\\\
+\\textbf\{Scenario:\} Flip a fair coin $n$ times. What is the tail bound on the probability of getting at least $3n/4$ heads? \
+\
+\\noindent\\textbf\{Step 1:\} $X = \\text\{Number of Heads\} \\sim \\text\{Binomial\}(n, 1/2)$, so $\\mu = E[X] = n/2$.\
+\
+\\noindent\\textbf\{Step 2:\} Apply Markov's: $P\\left\\\{X \\ge \\frac\{3\}\{4\}n\\right\\\} \\le \\frac\{\\mu\}\{\\frac\{3\}\{4\}n\} = \\frac\{n/2\}\{3n/4\} = \\frac\{2\}\{3\}$.\
+\
+\\noindent\\textbf\{Result:\} This is a terrible bound because it does not involve $n$ (it is constant).\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Example 2: Exam Grades\}\\\\\
+\\textbf\{Problem:\} The average grade on the first probability exam is 70\\%. The ``A'' grade cutoff is 90\\%. Find an upper bound on the fraction of students who receive an ``A''. \
+\
+\\noindent\\textbf\{Step 1:\} Let $X \\ge 0$ be the student grade. The mean is $\\mu = E[X] = 70$.\
+\
+\\noindent\\textbf\{Step 2:\} State Markov's Inequality: $P(X \\ge a) \\le \\frac\{E[X]\}\{a\}$.\
+\
+\\noindent\\textbf\{Step 3:\} Substitute $\\mu = 70$, threshold $a = 90$: $P(X \\ge 90) \\le \\frac\{70\}\{90\}$.\
+\
+\\noindent\\textbf\{Step 4:\} Simplify to $7/9$. \\textbf\{Result:\} At most 77.8\\% of students can receive an ``A'' ($P(X \\ge 90) \\le 0.778$).\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Example 3: Server Request Load\}\\\\\
+\\textbf\{Problem:\} A server processes an average of 5,000 requests per second. Find an upper bound on the probability that the server receives 20,000 or more requests in a given second. \
+\
+\\noindent\\textbf\{Step 1:\} Let $X$ be requests/sec. $\\mu = E[X] = 5,000$.\
+\
+\\noindent\\textbf\{Step 2:\} Define threshold $a = 20,000$.\
+\
+\\noindent\\textbf\{Step 3:\} $P(X \\ge 20,000) \\le \\frac\{5,000\}\{20,000\}$.\
+\
+\\noindent\\textbf\{Step 4:\} Simplify. $P(X \\ge 20,000) \\le 1/4 = 0.25$. At most a 25\\% chance of $\\ge 20,000$ requests.\
+\
+\\section\{Chebyshev's Inequality\}\
+\
+\\subsection\{Definition and Intuition\}\
+\\textbf\{Key Idea:\} Uses the mean + variance to control the deviation from the mean.\
+\
+\\textbf\{Chebyshev Inequality:\} \
+\\[ P(|X - \\mu| \\ge a) \\le \\frac\{Var(X)\}\{a^2\} \\]\
+\
+\\subsection\{Proof (Idea)\}\
+\\begin\{proof\}\
+Apply Markov's inequality on $(X-\\mu)^2$.\
+\\begin\{align*\}\
+P(|X-\\mu| \\ge a) &= P((X-\\mu)^2 \\ge a^2) \\\\\
+&\\le \\frac\{E[(X-\\mu)^2]\}\{a^2\} = \\frac\{Var(X)\}\{a^2\}\
+\\end\{align*\}\
+\\end\{proof\}\
+\
+\\subsection\{Worked Examples: Chebyshev's Inequality\}\
+\
+\\noindent\\textbf\{Example 1: Running Coin Flip Example\}\\\\\
+\\textbf\{Setup:\} $X \\sim \\text\{Binomial\}(n, 1/2)$. $\\mu = \\frac\{n\}\{2\}$, $Var(X) = \\frac\{n\}\{4\}$.\
+\
+\\noindent\\textbf\{Application:\} $P\\left(X \\ge \\frac\{3\}\{4\}n\\right) = \\frac\{1\}\{2\}P\\left(\\left|X - \\frac\{n\}\{2\}\\right| \\ge \\frac\{n\}\{4\}\\right) \\le \\frac\{2\}\{n\}$.\
+\
+\\noindent\\textbf\{Key Insight:\} This bound decreases as $n$ increases, making it much better than Markov's bound, which remained constant.\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Example 2: Exam Grades with Variance\}\\\\\
+\\textbf\{Problem:\} Average grade is 70\\%, standard deviation is 5\\%. ``A'' cutoff is 90\\%. Obtain a tighter bound on ``A'' students. \
+\
+\\noindent\\textbf\{Step 1:\} $\\mu = 70$, $\\sigma = 5 \\Rightarrow \\sigma^2 = 25$.\
+\
+\\noindent\\textbf\{Step 2:\} $X \\ge 90 \\Rightarrow |X - 70| \\ge 20$. Apply one-sided bound: $P(X \\ge 90) \\le P(|X - 70| \\ge 20)$.\
+\
+\\noindent\\textbf\{Step 3 \\& 4:\} Substitute $a=20$ and $\\sigma^2=25$. $P(|X - 70| \\ge 20) \\le \\frac\{25\}\{400\} = \\frac\{1\}\{16\} = 0.0625$.\
+\
+\\noindent\\textbf\{Result:\} Much tighter than Markov's bound of 0.778.\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Example 3: Network Latency SLA\}\\\\\
+\\textbf\{Problem:\} Average latency $E[X] = 50$ ms, variance $Var(X) = 16\\text\{ ms\}^2$. Bound probability latency falls outside $[30\\text\{ ms\}, 70\\text\{ ms\}]$. \
+\
+\\noindent\\textbf\{Step 1 \\& 2:\} $\\mu = 50, \\sigma^2 = 16$. Failure condition: $X \\notin [30, 70] \\iff |X - 50| \\text\{ [cite\\_start]\} \\ge 20$.\
+\
+\\noindent\\textbf\{Step 3 \\& 4:\} Apply Chebyshev with $a=20$. $P(|X - 50| \\ge 20) \\le \\frac\{16\}\{20^2\} = \\frac\{16\}\{400\} = \\frac\{1\}\{25\} = 0.04$.\
+\
+\\section\{Chernoff Bound and Poisson Tail\}\
+\
+\\subsection\{Definition and Intuition\}\
+\\textbf\{Key Idea:\} Uses the transformation $e^\{tX\}$ to bound tails. The exponential function grows very fast, heavily amplifying large values of $X$, which yields a tighter tail bound.\
+\
+\\textbf\{Core Trick (Transformation):\} $P(X \\ge a) = P(e^\{tX\} \\ge e^\{ta\})$.\
+\
+Because $e^\{tX\}$ is strictly non-negative, we can apply Markov's Inequality to it:\
+\\[ P(e^\{tX\} \\ge e^\{ta\}) \\le \\frac\{E[e^\{tX\}]\}\{e^\{ta\}\} \\]\
+\
+\\textbf\{Chernoff Bound (Final Form):\} \
+\\[ P(X \\ge a) \\le \\min_\{t>0\}\\left\\\{\\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}\\right\\\} \\]\
+\
+\\textbf\{Lower Tail:\} For left tail bounds, use a trick with $t<0$. $P(X \\le a) \\le \\min_\{t<0\}\\left\\\{\\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}\\right\\\}$.\
+\
+\\subsection\{Proof: Chernoff Bound for Poisson Tail\}\
+\\begin\{proof\}\
+\\textbf\{Goal:\} Bound the tail of $X \\sim \\text\{Poisson\}(\\lambda)$.\
+\
+\\noindent\\textbf\{Step 1:\} Derive $E[e^\{tX\}]$ for $t > 0$:\
+\\begin\{align*\}\
+E[e^\{tX\}] &= \\sum_\{i=0\}^\{\\infty\}e^\{ti\} \\cdot \\frac\{e^\{-\\lambda\}\\lambda^i\}\{i!\} \\\\\
+&= e^\{-\\lambda\}\\sum_\{i=0\}^\{\\infty\}\\frac\{(\\lambda e^t)^i\}\{i!\} \\\\\
+&= e^\{-\\lambda\} \\cdot e^\{\\lambda e^t\} = e^\{\\lambda(e^t - 1)\}\
+\\end\{align*\}\
+\
+\\noindent\\textbf\{Step 2:\} Let $a > \\lambda$. To minimize the bound $P\\\{X \\ge a\\\} \\le \\min_\{t>0\}\\\{e^\{\\lambda(e^t - 1) - ta\}\\\}$, we minimize the exponent.\
+\
+The exponent is minimized at $t = \\ln(a/\\lambda)$.\
+\
+\\noindent\\textbf\{Result:\} $P\\\{X \\ge a\\\} \\le e^\{\\lambda\\left(\\frac\{a\}\{\\lambda\} - 1\\right) - a \\ln\\left(\\frac\{a\}\{\\lambda\}\\right)\} = e^\{a-\\lambda\} \\cdot \\left(\\frac\{\\lambda\}\{a\}\\right)^a$.\
+\\end\{proof\}\
+\
+\\subsection\{Worked Examples: Chernoff Bound\}\
+\
+\\noindent\\textbf\{Example 1: Binomial Lower Tail\}\\\\\
+\\textbf\{Problem:\} $p=0.5$, $n=20$. Using $P(X \\le (1-\\delta)\\mu) \\le e^\{-\\mu\\delta^2/2\}$, bound the probability of zero job offers. \
+\
+\\noindent\\textbf\{Step 1:\} $X \\sim \\text\{Binomial\}(20, 0.5)$, $\\mu = np = 10$.\
+\
+\\noindent\\textbf\{Step 2:\} Set $(1-\\delta)\\mu = 0$ and solve for $\\delta \\Rightarrow \\delta = 1$.\
+\
+\\noindent\\textbf\{Step 3 \\& 4:\} $P(X \\le 0) \\le \\exp\\left(-\\frac\{10\}\{2\}\\right) = e^\{-5\} \\approx 0.0067$.\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Example 2: Deriving the Lower-Tail Chernoff Bound\}\\\\\
+\\textbf\{Step 1:\} Choose $t < 0$. Multiplying by negative $t$ flips the inequality: $P(X \\le a) = P(tX \\ge ta)$.\
+\
+\\noindent\\textbf\{Step 2:\} Exponentiate both sides: $P(tX \\ge ta) = P(e^\{tX\} \\ge e^\{ta\})$.\
+\
+\\noindent\\textbf\{Step 3:\} Apply Markov's Inequality: $P(e^\{tX\} \\ge e^\{ta\}) \\le \\frac\{E[e^\{tX\}]\}\{e^\{ta\}\}$.\
+\
+\\noindent\\textbf\{Step 4:\} Minimize over $t<0$: $P(X \\le a) \\le \\min_\{t<0\}\\\{e^\{-ta\}E[e^\{tX\}]\\\}$.\
+\
+\\section\{Jensen's Inequality\}\
+\
+\\subsection\{Convex Functions Definition\}\
+\\textbf\{Definition:\} A function $g(x)$ is convex on interval $S$ if, for any $x_1, x_2 \\in S$ and $\\alpha \\in [0, 1]$, we have:\
+\\[ g(\\alpha x_1 + (1-\\alpha)x_2) \\le \\alpha g(x_1) + (1-\\alpha)g(x_2) \\]\
+\
+\\subsection\{Jensen's Theorem and Intuition\}\
+\\textbf\{Theorem (Jensen's Inequality):\} If $g(x)$ is convex on an interval $S$ and $X$ takes values in $S$, then:\
+\\[ g(E[X]) \\le E[g(X)] \\]\
+\
+\\textbf\{Interpretation:\} Averaging first yields a smaller value; applying the convex function first yields a larger value. Convex functions push expectation upwards.\
+\
+We already know variance is non-negative ($Var(X) = E[X^2] - E[X]^2 \\ge 0 \\Rightarrow E[X^2] \\ge E[X]^2$). Jensen's inequality generalises this: for any positive random variable $X$ and $a \\in \\mathbb\{R\}$, $E[X^a] \\ge E[X]^a$.\
+\
+\\subsection\{Worked Example: Verifying Jensen's Inequality Numerically\}\
+\\textbf\{Problem:\} Let $X = 1$ with probability 0.5, and $X = 3$ with probability 0.5. Verify Jensen's for $g(x) = x^2$. \
+\
+\\noindent\\textbf\{Step 1:\} Compute expectation. $E[X] = 0.5(1) + 0.5(3) = 2$.\
+\
+Apply function after averaging: $g(E[X]) = (2)^2 = 4$.\
+\
+Apply function first: $E[g(X)] = 0.5(1^2) + 0.5(3^2) = 5$.\
+\
+\\noindent\\textbf\{Result:\} Since $4 \\le 5$, the inequality holds.\
+\
+\\section\{Case Study: E-Commerce System Failures\}\
+\
+\\textbf\{Scenario:\} During an e-commerce sale event, millions of users log in. While average traffic is manageable, sudden and extreme traffic spikes cause server queues to overflow, crashing the system.\
+\
+\\textbf\{Goal:\} Design server capacity ($C$) not for ``average'' load, but for extreme ``tail'' spikes.\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Mapping Demand to Probability\}\
+\\begin\{itemize\}\
+    \\item \\textbf\{Demand ($X$):\} Incoming requests per second.\
+    \\item \\textbf\{Capacity ($C$):\} Maximum requests the server cluster can handle.\
+    \\item \\textbf\{Failure Event:\} $X \\ge C$.\
+    \\item \\textbf\{Service Level Agreement (SLA):\} Management demands 99\\% uptime, requiring $P(X \\ge C) \\le 0.01$.\
+\\end\{itemize\}\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{Provisioning Hardware Based on Statistical Knowledge\}\
+\
+\\noindent\\textbf\{Using Markov's Bound (Only average known):\}\
+\\begin\{itemize\}\
+    \\item Telemetry shows average load $\\mu = 10,000\\text\{ req/sec\}$.\
+    \\item $P(X \\ge C) \\le \\frac\{\\mu\}\{C\} = 0.01 \\Rightarrow C = 1,000,000\\text\{ req/sec\}$.\
+    \\item \\textbf\{System Inference:\} Relying strictly on the mean forces you to buy $100\\times$ more hardware to be safe.\
+\\end\{itemize\}\
+\
+\\noindent\\textbf\{Using Chebyshev's Bound (Average and Variance known):\}\
+\\begin\{itemize\}\
+    \\item $\\mu = 10,000\\text\{ req/sec\}$, $\\sigma = 2,000\\text\{ req/sec\}$.\
+    \\item $P(|X - \\mu| \\ge a) \\le \\frac\{\\sigma^2\}\{a^2\}$, where $a = C - \\mu$.\
+    \\item Solve: $\\frac\{2000^2\}\{(C - 10000)^2\} = 0.01 \\Rightarrow C = 30,000\\text\{ req/sec\}$.\
+    \\item \\textbf\{System Inference:\} Capacity requirement reduced from $1,000,000$ to $30,000$.\
+\\end\{itemize\}\
+\
+\\noindent\\textbf\{Using Chernoff Bound (Exact traffic distribution known):\}\
+\\begin\{itemize\}\
+    \\item Traffic follows a Poisson distribution.\
+    \\item $P(X \\ge C) \\le e^\{-I(C)\} \\le 0.01 \\Rightarrow C \\approx 14,500\\text\{ req/sec\}$.\
+    \\item \\textbf\{System Inference:\} Chernoff provides precise scaling with minimal hardware.\
+\\end\{itemize\}\
+\
+\\vspace\{1em\}\
+\\noindent\\textbf\{The Golden Rule of Probability in Systems\} \\\\\
+More statistical information $\\Rightarrow$ Tighter bounds $\\Rightarrow$ Lower hardware costs.\
+\
+\\end\{document\}}

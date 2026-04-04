@@ -1,0 +1,185 @@
+\documentclass[11pt]{article}
+
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+
+\title{CSE400: Fundamentals of Probability in Computing\\
+Lecture 21: Inequalities and Tail Bounds}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section{Tail — Definition and Motivation}
+
+\subsection{Definition}
+The \textbf{tail of a random variable $X$} is:
+\[
+P\{X > x\}
+\]
+
+\subsection{Why do we care about tails?}
+\begin{itemize}
+    \item Jobs delayed more than 24 hours
+    \item Packets dropped due to full buffer
+\end{itemize}
+
+\subsection{Key Idea}
+\begin{itemize}
+    \item Mean $\rightarrow$ average behavior (easy)
+    \item Tail $\rightarrow$ rare extreme events (hard)
+\end{itemize}
+
+\subsection{Why are tails hard to compute?}
+\begin{itemize}
+    \item Requires summing many small probabilities
+\end{itemize}
+
+\section{Tail Example 1}
+
+\subsection{Setup}
+Suppose distributing $n$ jobs among $n$ servers at random.
+
+\textbf{Question:} What is the probability that a particular server gets $\ge k$ jobs?
+
+\subsection{Assumptions / Model}
+\begin{itemize}
+    \item Jobs assigned randomly
+    \item Most servers get few jobs
+    \item Occasionally, one server gets many jobs
+\end{itemize}
+
+\subsection{Observation}
+\begin{itemize}
+    \item This is a \textbf{tail event (rare overload)}
+\end{itemize}
+
+\subsection{Distribution}
+\[
+X \sim \text{Binomial}(n, p)
+\]
+
+\subsection{Exact Probability}
+\[
+P\{X \ge k\} = \sum_{i=k}^{n} \binom{n}{i} p^i (1 - p)^{n-i}
+\]
+
+\section{Tail Example 2}
+
+\subsection{Setup}
+Jobs arrive according to a Poisson process with rate $\lambda$ jobs/hour.
+
+\textbf{Question:} What is the probability that $\ge k$ jobs arrive during the first hour?
+
+\subsection{Assumptions / Model}
+\begin{itemize}
+    \item Jobs arrive randomly over time
+    \item Most hours have moderate arrivals
+    \item Sometimes, there is a burst of arrivals
+\end{itemize}
+
+\subsection{Observation}
+\begin{itemize}
+    \item This is a \textbf{tail event (sudden spike in load)}
+\end{itemize}
+
+\subsection{Distribution}
+\[
+X \sim \text{Poisson}(\lambda)
+\]
+
+\subsection{Exact Probability}
+\[
+P\{X \ge k\} = \sum_{i=k}^{\infty} e^{-\lambda} \frac{\lambda^i}{i!}
+\]
+
+\section{Why Tail Bounds?}
+
+\subsection{Observation}
+\begin{itemize}
+    \item Exact tail probabilities are often \textbf{hard to compute}
+\end{itemize}
+
+\subsection{Exact Computation}
+\begin{itemize}
+    \item Poisson:
+    \[
+    P\{X \ge k\} = \sum_{i=k}^{\infty} e^{-\lambda} \frac{\lambda^i}{i!}
+    \]
+    
+    \item Binomial:
+    \[
+    P\{X \ge k\} = \sum_{i=k}^{n} \binom{n}{i} p^i (1 - p)^{n-i}
+    \]
+    
+    \item These involve \textbf{complicated, long sums}
+\end{itemize}
+
+\subsection{Idea}
+Instead of exact value:
+\begin{itemize}
+    \item Find an \textbf{upper bound}
+    \item Easier to compute
+    \item Still gives a \textbf{guarantee}
+\end{itemize}
+
+\[
+P(X \ge k) \le \text{something simple}
+\]
+
+\subsection{Key Idea}
+\begin{itemize}
+    \item Approximate safely instead of computing exactly
+\end{itemize}
+
+\section{Running Example (Key Idea)}
+
+\begin{itemize}
+    \item Develop progressively better (tighter) tail bounds
+    \item Test all bounds on the same example
+\end{itemize}
+
+\subsection{Experiment}
+Flip a fair coin $n$ times
+
+\subsection{Random Variable}
+\[
+X = \text{number of heads}
+\]
+
+\subsection{Distribution}
+\[
+X \sim \text{Binomial}(n, \tfrac{1}{2})
+\]
+
+\subsection{Mean}
+\[
+E[X] = \frac{n}{2}
+\]
+
+\subsection{Question}
+\[
+P\left(X \ge \frac{3}{4}n \right)
+\]
+
+\section{Markov’s Inequality}
+
+\subsection{Key Idea}
+\begin{itemize}
+    \item Uses only the \textbf{mean}
+    \item Large values $\Rightarrow$ rare
+\end{itemize}
+
+\subsection{Example}
+\begin{itemize}
+    \item Avg = 10 $\Rightarrow$ few values can be 100+
+\end{itemize}
+
+\subsection{Markov Inequality (Result)}
+\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]
+
+\end{document}

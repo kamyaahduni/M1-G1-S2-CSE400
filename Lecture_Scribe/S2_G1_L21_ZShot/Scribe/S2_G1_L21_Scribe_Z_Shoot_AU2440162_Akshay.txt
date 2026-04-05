@@ -1,0 +1,263 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath, amssymb}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\title{CSE400 -- Fundamentals of Probability in Computing\\
+Lecture 21 \& 22: Inequalities and Tail Bound\\
+\large (Complete Lecture Scribe for Exam Revision)}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Acknowledgement}
+
+Mor Harchol-BalterBruce, PhD\\
+J. Nelson Professor of Computer Science\\
+Dept. of Computer Science\\
+Carnegie Mellon University\\
+Pittsburgh, PA 15213\\
+Published: 2024\\
+Publisher: Cambridge University Press (CUP)\\
+ISBN: 978-1-009-30907-3
+
+\section*{Outline}
+
+\begin{itemize}
+\item Tail and Motivation of Tail Bound
+\item Markov’s Inequality
+\item Definition and Proof
+\item Example
+\item Chebyshive’s Inequality
+\item Definition and Proof
+\item Example
+\item Chernof Bound and Poison Tail
+\item Definition and Proof
+\item Example
+\item Jensen’s Inequality
+\item Convex Functions
+\item Proof and Example
+\item Case Study and System Level Understanding
+\end{itemize}
+
+\section*{Tails}
+
+\textbf{Definition}
+
+The tail of a random variable is:
+
+\textbf{Why do we care about tails?}
+\begin{itemize}
+\item Jobs delayed more than 24 hours
+\item Packets dropped due to full buffer
+\end{itemize}
+
+\textbf{Key idea}
+
+Mean $\rightarrow$ average behavior (easy)\\
+Tail $\rightarrow$ rare extreme events (hard)
+
+\textbf{Why are tails hard to compute?}
+
+Requires summing many small probabilities
+
+\section*{Tails Example-1}
+
+\textbf{Q:}
+
+Suppose you’re distributing jobs among servers at random.\\
+What’s the probability that a particular server gets jobs?
+
+\textbf{Intuition}
+\begin{itemize}
+\item Jobs are assigned randomly
+\item Most servers get few jobs
+\item Occasionally, one server gets many jobs
+\item This is a tail event (rare overload)
+\end{itemize}
+
+\[
+X \sim \text{Binomial}(n, p)
+\]
+\[
+P\{X > x\}, \quad X \ge k
+\]
+
+\section*{Tails Example-2}
+
+\textbf{Q:}
+
+Jobs arrive to a datacenter according to a Poisson process with rate jobs/hour.\\
+What’s the probability that jobs arrive during the first hour?
+
+\textbf{Intuition}
+\begin{itemize}
+\item Jobs arrive randomly over time
+\item Most hours have moderate arrivals
+\item Sometimes, we see a burst of arrivals
+\item This is a tail event (sudden spike in load)
+\end{itemize}
+
+\section*{Why Tail Bounds?}
+
+Exact tail probabilities are often hard to compute
+
+\textbf{Exact computation}
+
+\[
+P\{X \ge k\} = \sum_{i=k}^{n} \binom{n}{i} p^i (1-p)^{n-i}
+\]
+
+\[
+X \sim \text{Poisson}(\lambda)
+\]
+
+\[
+P\{X \ge k\} = \sum_{i=k}^{\infty} e^{-\lambda} \frac{\lambda^i}{i!}
+\]
+
+Complicated, long sums!
+
+\textbf{Idea:} Instead of exact value $\ldots$
+
+\begin{itemize}
+\item We find an upper bound
+\item Easier to compute
+\item Still gives a guarantee
+\end{itemize}
+
+\textbf{Key idea}
+
+Approximate safely instead of computing exactly
+
+\section*{Running Example (Key Idea)}
+
+We will develop progressively better (tighter) tail bounds\\
+We test all bounds on the same example
+
+\textbf{Experiment}
+
+Flip a fair coin $n$ times
+
+\[
+X = \text{number of heads}
+\]
+
+\[
+X \sim \text{Binomial}(n, \tfrac{1}{2})
+\]
+
+\[
+E[X] = \frac{n}{2}
+\]
+
+\[
+P(X \ge k) = ?
+\]
+
+\[
+P(X \ge k) \le \text{something simple}
+\]
+
+\section*{Markov’s Inequality}
+
+\textbf{Key Idea}
+
+Uses only the mean\\
+Large values $\Rightarrow$ rare
+
+\textbf{Example}
+
+Avg = 10 $\Rightarrow$ few values can be 100+
+
+\textbf{Markov Inequality}
+
+\[
+P(X \ge a) \le \frac{E[X]}{a}
+\]
+
+\textbf{Proof (Idea)}
+
+\[
+E[X] = \sum_{x=0}^{\infty} x \cdot p_X(x)
+\]
+\[
+\ge \sum_{x=a}^{\infty} x \cdot p_X(x)
+\]
+\[
+\ge \sum_{x=a}^{\infty} a \cdot p_X(x)
+\]
+\[
+= a \cdot P(X \ge a)
+\]
+
+\section*{Markov Inequality: Real-Life Example}
+
+Average income = 10,000
+
+\[
+P(X \ge 50000) \le \frac{10000}{50000} = 0.2
+\]
+
+At most 20\% people can earn 50,000
+
+\section*{Markov Inequality: Solved Example 1}
+
+Average = 70\%, cutoff = 90
+
+\[
+P(X \ge 90) \le \frac{70}{90} = \frac{7}{9}
+\]
+
+\[
+P(X \ge 90) \le 0.778
+\]
+
+\section*{Markov Inequality: Solved Example 2}
+
+Average = 5000, threshold = 20000
+
+\[
+P(X \ge 20000) \le \frac{5000}{20000} = \frac{1}{4}
+\]
+
+\section*{Chebyshev’s Inequality}
+
+\textbf{Key Idea}
+
+Uses mean + variance\\
+Controls deviation from mean
+
+\[
+P(|X - \mu| \ge a) \le \frac{\text{Var}(X)}{a^2}
+\]
+
+\textbf{Proof Idea}
+
+Apply Markov on $(X - \mu)^2$
+
+\section*{Chebyshev on Running Example}
+
+\[
+X \sim \text{Binomial}(n, \tfrac{1}{2})
+\]
+\[
+\mu = \frac{n}{2}, \quad \text{Var}(X) = \frac{n}{4}
+\]
+
+\section*{Chebyshev Example}
+
+\[
+P(|X - 70| \ge 30) \le \frac{10^2}{30^2} = \frac{1}{9}
+\]
+
+\section*{Case Study}
+
+How to predict the worst case demands on server?
+
+(Content continues as per slides with system-level understanding and application of tail bounds.)
+
+\section*{End of Lecture Scribe}
+
+\end{document}
